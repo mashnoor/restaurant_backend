@@ -1,0 +1,1 @@
+[14-Oct-2017 09:20:27 UTC] PHP Fatal error:  Class 'App\table' not found in /home5/rajitdem/public_html/restaurant/app/Http/Controllers/TableController.php on line 20
