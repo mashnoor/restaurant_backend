@@ -22,7 +22,13 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('user_id',Auth::guard('api')->user()->id)->orderBy('id','DESC')->limit(20)->get();
+        $response=array(
+            'status'=>1, 
+            'msg'=>'Order Submitted Successfully!',
+            'data'=>$orders->toArray()
+            );
+        return response()->json($response);
     }
 
     /**
@@ -195,7 +201,82 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), Order::rules());
+        if($validator->fails())
+        {
+
+            $response=array(
+                'status'=>0, 
+                'msg'=>'Validation Error!',
+                'data'=>$validator->errors()->toArray()
+                );   
+        }
+        else
+        {
+
+            //preparing order lines
+            $orderlines=array();
+            $sub_total=0;
+
+            foreach($request->items as $item)
+            {
+                $menu = Menu::find($item['menu_id']);
+                
+                if(!$menu->available)
+                {
+                    $response=array(
+                        'status'=>0, 
+                        'msg'=>'Item not available!',
+                        'data'=>['menu_id'=>$menu->id]
+                        );
+                    return response()->json($response);                     
+                }
+
+                $price=$menu->price;
+                $quantity=$item['quantity'];
+                $discount=Helper::get_menu_discount($menu->id);
+
+                $total=$price*$quantity;
+                $total-=$total*$discount/100;
+
+                $sub_total+=$total;
+
+                $orderlines[$menu->id]=array(
+
+                            'quantity'=>$quantity,
+                            'price'=>$price,
+                            'discount'=>$discount,
+                            'total'=>$total
+                    );
+            }
+
+            //preparing order
+            $invoice_discount=Helper::get_invoice_discount();
+            $amount_after_discount=$sub_total-($sub_total*$invoice_discount/100);
+            $net_total=floor($amount_after_discount);
+            $rounding_discount=number_format($amount_after_discount-$net_total,2);
+
+            $order=Order::find($id);
+            $order->table_id=Table::where('code',$request->table_code)->first()->id;
+            $order->type='Table';
+            $order->sub_total=$sub_total;
+            $order->discount=$invoice_discount;
+            $order->rounding_discount=$rounding_discount;
+            $order->net_total=$net_total;
+            $order->status=1;
+            $order->user_id=Auth::guard('api')->user()->id;
+            $order->save();
+
+            $order->menus()->sync($orderlines);
+
+            $response=array(
+                'status'=>1, 
+                'msg'=>'Order Updated Successfully!',
+                'data'=>['order_id'=>$order->id]
+                );             
+        }
+
+        return response()->json($response); 
     }
 
     /**
