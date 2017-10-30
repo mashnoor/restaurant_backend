@@ -57,7 +57,7 @@
 			</div>
 
 			{!! Html::linkRoute('menu.show', 'Cancel', [$menu->id], ['class' => 'btn btn-danger pull-right']) !!}
-			{!! Form::submit('Saves Changes', ['class' => 'btn btn-success pull-right']) !!}
+			{!! Form::submit('Save Changes', ['class' => 'btn btn-success pull-right']) !!}
 
 		</div>
 	{!! Form::close() !!}

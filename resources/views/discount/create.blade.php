@@ -36,9 +36,9 @@
 				</div>
 			
 				<div class="form-group">
-					{{ Form::label('menu_id', 'Menu ID :', ['class'=>'control-label col-sm-2']) }}
+					{{ Form::label('menu_id', 'Menu Name :', ['class'=>'control-label col-sm-2']) }}
 					<div class="col-sm-10">
-						{{ Form::select('menu_id', $discounts, null, ['class' => 'form-control']) }}
+						{{ Form::select('menu_id', $menus, null, ['class' => 'form-control']) }}
 						<span class="small text-danger">{{ $errors->first('menu_id') }}</span>
 					</div>
 				</div>

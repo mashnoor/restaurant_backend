@@ -31,45 +31,45 @@
 					<th>Serve</th>
 				</thead>
 				<tbody>
-				@foreach ($orders as $order)
+				@foreach ($pantrys as $pantry)
 					<tr>
-						<th>{{ $order->id }}</th>
-						<td>{{ $order->table->code }}</td>
-						<td>{{ $order->sub_total }}</td>
-						<td>{{ $order->discount }}</td>
-						<td>{{ $order->vat }}</td>
-						<td>{{ $order->rounding_discount }}</td>
-						<td>{{ $order->net_total }}</td>
-						<td>{{ date('M j, y, g:i a', strtotime($order->created_at)) }}</td>
+						<th>{{ $pantry->id }}</th>
+						<td>{{ $pantry->table->code }}</td>
+						<td>{{ $pantry->sub_total }}</td>
+						<td>{{ $pantry->discount }}</td>
+						<td>{{ $pantry->vat }}</td>
+						<td>{{ $pantry->rounding_discount }}</td>
+						<td>{{ $pantry->net_total }}</td>
+						<td>{{ date('M j, y, g:i a', strtotime($pantry->created_at)) }}</td>
 						<td>
-							@if ($order->status == 1)
+							@if ($pantry->status == 1)
 								Pending
-							@elseif ($order->status == 2)
+							@elseif ($pantry->status == 2)
 								Process
-							@elseif ($order->status == 3)
+							@elseif ($pantry->status == 3)
 								Serve
-							@elseif ($order->status == 4)
+							@elseif ($pantry->status == 4)
 								Cash Received
-							@elseif ($order->status == 5)
+							@elseif ($pantry->status == 5)
 								Order Complete
 							{{-- @elseif ($order->status == 6)
 								Order Complete --}}
 							@endif
 						</td>
 						<td>							
-							<a href="{{ route('order.show', $order->id) }}" class="btn btn-primary btn-sm">View</a>
+							<a href="{{ route('order.show', $pantry->id) }}" class="btn btn-primary btn-sm">View</a>
 						</td>
-						@if ($order->status == 2)
+						@if ($pantry->status == 2)
 							<td>------</td>
 							<td>
-								<a href="{{ route('order.serve', $order->id) }}" class="btn btn-success btn-sm">Serve</a>
+								<a href="{{ route('order.serve', $pantry->id) }}" class="btn btn-success btn-sm">Serve</a>
 							</td>
-						@elseif ($order->status == 1)
+						@elseif ($pantry->status == 1)
 							<td>							
-								<a href="{{ route('order.process', $order->id) }}" class="btn btn-info btn-sm">Process</a>
+								<a href="{{ route('order.process', $pantry->id) }}" class="btn btn-info btn-sm">Process</a>
 							</td>
 							<td>------</td>
-						@elseif ($order->status == 3 || 4)
+						@elseif ($pantry->status == 3 || 4)
 							<td>------</td>
 							<td>------</td>
 						@endif
@@ -79,7 +79,7 @@
 			</table>
 
 			<div class="text-center">
-				{{ $orders->links() }}
+				{{ $pantrys->links() }}
 			</div>
 
 		</div>

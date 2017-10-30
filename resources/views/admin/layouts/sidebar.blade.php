@@ -66,7 +66,16 @@
           </li>
           <li><a><i class="fa fa-cutlery"></i> Kitchen <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
-              <li><a href="{{ URL::to('/order') }}">All Orders</a>
+              <li><a href="{{ URL::to('/order') }}">Order Process</a>
+              </li>
+              <li>
+                <a href="{{ URL::to('/order/available') }}">Off Menus</a>
+              </li>
+            </ul>
+          </li>
+          <li><a><i class="fa fa-cutlery"></i> Pantry <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="display: none">
+              <li><a href="{{ URL::to('/pantry') }}">All Orders</a>
               </li>
             </ul>
           </li>

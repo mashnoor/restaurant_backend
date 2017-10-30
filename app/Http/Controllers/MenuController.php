@@ -141,4 +141,6 @@ class MenuController extends Controller
 
         return redirect()->route('menu.index');
     }
+
+
 }

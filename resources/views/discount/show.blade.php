@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10 col-md-offset-1">
 			<table class="table">
 				<tr>
 					<th width="15%">Type :</th>

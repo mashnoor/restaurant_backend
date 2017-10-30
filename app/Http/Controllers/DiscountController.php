@@ -29,7 +29,7 @@ class DiscountController extends Controller
      */
     public function create()
     {
-        $data['discounts'] = Helper::discountOptions(); 
+        $data['menus'] = Helper::discountMenuOptions(); 
         return view('discount.create', $data);
     }
 
@@ -87,8 +87,8 @@ class DiscountController extends Controller
     public function edit($id)
     {
         $discount = Discount::find($id);
-        $discounts = Helper::discountOptions();        
-        return view('discount.edit')->withDiscount($discount)->withDiscounts($discounts);
+        $menus = Helper::discountMenuOptions();        
+        return view('discount.edit')->withDiscount($discount)->withMenus($menus);
     }
 
     /**

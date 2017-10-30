@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Session;
 use App\Order;
 
 class OrderController extends Controller
@@ -19,7 +20,7 @@ class OrderController extends Controller
 
 
   public function show($id)
-  {     
+  {
     $order = Order::find($id);
     return view('order.show')->withOrder($order);
   }
@@ -32,6 +33,8 @@ class OrderController extends Controller
 
     $order->save();
 
+    Session::flash('success', 'The Order was successfully Serve!');
+
     return redirect()->back();
   }
 
@@ -43,55 +46,10 @@ class OrderController extends Controller
 
     $order->save();
 
-    return redirect()->back();
-  }
-
-
-  public function orderManages()
-  {  
-    $ordermanages = Order::where('status', '>', 2)->get();
-
-    return view('order.orderManages')->withOrdermanages($ordermanages);
-  }
-
-
-  public function showCash($id)
-  {     
-    $ordermanages = Order::find($id);
-    return view('order.showCash')->withOrdermanages($ordermanages);
-  }
-
-
-  public function cashReceived($id)
-  {
-    $orderManages = Order::find($id);
-    $orderManages->status = 4;
-
-    $orderManages->save();
+    Session::flash('success', 'The Order was successfully Process!');
 
     return redirect()->back();
   }
 
-
-  public function invoicePrint($id)
-  {     
-    $orderManages = Order::find($id);
-    $orderManages->status = 5;
-
-    $orderManages->save();
-
-    return view('order.cashReceived')->with('orderManages', $orderManages);
-  }
-
-
-  // public function orderComplete($id)
-  // {
-  //   $orderManages = Order::find($id);
-  //   $orderManages->status = 6;
-
-  //   $orderManages->save();
-
-  //   return redirect()->back();
-  // }
 
 }

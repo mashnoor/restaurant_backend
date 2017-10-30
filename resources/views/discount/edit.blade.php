@@ -38,7 +38,7 @@
 			<div class="form-group eg">
 				{{ Form::label('menu_id', 'Menu ID :', ['class'=>'control-label col-sm-2']) }}
 				<div class="col-sm-10">
-					{{ Form::select('menu_id', $discounts, null, ['class' => 'form-control']) }}
+					{{ Form::select('menu_id', $menus, null, ['class' => 'form-control']) }}
 				</div>
 			</div>
 
@@ -71,7 +71,7 @@
 			</div>
 
 			{!! Html::linkRoute('discount.show', 'Cancel', [$discount->id], ['class' => 'btn btn-danger pull-right', 'style' => 'margin-top: 18px;']) !!}
-			{!! Form::submit('Saves Changes', ['class' => 'btn btn-success pull-right', 'style' => 'margin-top: 18px;']) !!}
+			{!! Form::submit('Save Changes', ['class' => 'btn btn-success pull-right', 'style' => 'margin-top: 18px;']) !!}
 
 		{!! Form::close() !!}
 		</div>	

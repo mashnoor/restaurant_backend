@@ -24,6 +24,7 @@
           <th>VAT</th>
           <th>Total Discount</th>
           <th>Net Total</th>
+          <th>Order Time</th>
           <th>Status</th>
           <th>View</th>
           <th>Cash Received</th>
@@ -38,6 +39,7 @@
             <td>{{ $orderManage->vat }}</td>
             <td>{{ $orderManage->rounding_discount }}</td>
             <td>{{ $orderManage->net_total }}</td>
+            <td>{{ date('M j, y, g:i a', strtotime($orderManage->created_at)) }}</td>
             <td>
               @if ($orderManage->status == 1)
                 Pending
@@ -46,9 +48,9 @@
               @elseif ($orderManage->status == 3)
                 Serve
               @elseif ($orderManage->status == 4)
-                Cash Received
+                Print Invoice
               @elseif ($orderManage->status == 5)
-                Order Complete
+                Cash Received
               {{-- @elseif ($orderManage->status == 6)
                 Order Complete --}}
               @endif
@@ -58,15 +60,15 @@
             </td>
             @if ($orderManage->status == 3)
               <td>
-                <a href="{{ route('order.cashReceivd', $orderManage->id) }}" class="btn btn-success btn-sm">Cash Received</a>
+                <a target="_blank" href="{{ route('order.billSubmit', $orderManage->id) }}" class="btn btn-info btn-sm">Submit Bill</a>
               </td>
             @elseif ($orderManage->status == 4)
               <td>
-                <a target="_blank" href="{{ route('order.invoicePrint', $orderManage->id) }}" class="btn btn-info btn-sm">Print Invoice</a>
+                <a href="{{ route('order.cashReceived', $orderManage->id) }}" class="btn btn-info btn-sm">Cash Received</a>
               </td>
             @elseif ($orderManage->status == 5)
               <td>
-                <a target="_blank" href="{{ route('order.invoicePrint', $orderManage->id) }}" class="btn btn-info btn-sm">Print Invoice</a>
+                <a href="" class="btn btn-success btn-sm">Complete</a>
               </td>
               {{-- <td>
                 <a href="{{ route('order.orderComplete', $orderManage->id) }}" class="btn btn-info btn-sm">Complete</a>
@@ -80,7 +82,7 @@
       </table>
 
       <div class="text-center">
-        {{-- {{ $ordermanages->links() }} --}}
+        {{ $ordermanages->links() }}
       </div>
 
     </div>

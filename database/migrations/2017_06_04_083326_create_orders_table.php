@@ -22,6 +22,8 @@ class CreateOrdersTable extends Migration
             $table->decimal('vat',15,2)->default(0.00);
             $table->decimal('rounding_discount',15,2)->default(0.00);
             $table->decimal('net_total',15,2)->default(0.00);
+            $table->decimal('cash_received',15,2)->default(0.00);
+            $table->tinyInteger('payment_modes');
             $table->tinyInteger('status');
             $table->integer('user_id');
             $table->timestamps();

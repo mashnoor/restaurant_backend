@@ -25,7 +25,7 @@
 					</div>
 				</div>
 
-				{{ Form::submit('Create Menu', ['class' => 'btn btn-success btn-lg pull-right']) }}
+				{{ Form::submit('Create Category', ['class' => 'btn btn-success btn-lg pull-right']) }}
 
 			{!! Form::close() !!}
 		</div>

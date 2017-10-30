@@ -40,10 +40,15 @@ Route::resource('table', 'TableController');
 
 Route::get('/order', 'OrderController@index');
 Route::get('/order/show/{id}', ['as'=> 'order.show', 'uses'=> 'OrderController@show']);
-Route::get('/order/serve/{id}', ['as'=> 'order.serve', 'uses'=> 'OrderController@orderServe']);
 Route::get('/order/process/{id}', ['as'=> 'order.process', 'uses'=> 'OrderController@orderProcess']);
-Route::get('/order/manages', ['as'=> 'order.manages', 'uses'=> 'OrderController@orderManages']);
-Route::get('/order/cashReceivd/{id}', ['as'=> 'order.cashReceivd', 'uses'=> 'OrderController@cashReceived']);
-Route::get('/order/showCash/{id}', ['as'=> 'order.showCash', 'uses'=> 'OrderController@showCash']);
-Route::get('/order/invoicePrint/{id}', ['as'=> 'order.invoicePrint', 'uses'=> 'OrderController@invoicePrint']);
-// Route::get('/order/orderComplete/{id}', ['as'=> 'order.orderComplete', 'uses'=> 'OrderController@orderComplete']);
+Route::get('/order/serve/{id}', ['as'=> 'order.serve', 'uses'=> 'OrderController@orderServe']);
+Route::get('/pantry', 'PantryController@index');
+
+Route::get('/order/manages', ['as'=> 'order.manages', 'uses'=> 'CashManagerController@orderManages']);
+Route::get('/order/showCash/{id}', ['as'=> 'order.showCash', 'uses'=> 'CashManagerController@showCash']);
+Route::get('/order/billSubmit/{id}', ['as'=> 'order.billSubmit', 'uses'=> 'CashManagerController@billSubmit']);
+Route::get('/order/cashReceived/{id}', ['as'=> 'order.cashReceived', 'uses'=> 'CashManagerController@cashReceived']);
+Route::post('/order/getPaymentModes/{id}', ['as'=> 'order.getPaymentModes', 'uses'=> 'CashManagerController@getPaymentModes']);
+Route::get('/order/available',  'AvailableMenuController@showAvailableMenus');
+Route::get('/order/availables/{id}', ['as'=> 'order.availables', 'uses'=> 'AvailableMenuController@availableMenus']);
+Route::get('/order/unavailable/{id}', ['as'=> 'order.unavailable', 'uses'=> 'AvailableMenuController@unavailableMenus']);
