@@ -41,7 +41,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, array(
             'name'  => 'required',
-            'image' =>  'required'
+            'image' =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ));
 
         $category = New Category;
@@ -50,6 +50,18 @@ class CategoryController extends Controller
         $category->image = $request->image;
 
         $category->save();
+
+        if($file = $request->hasFile('image'))
+        {
+            $file       = $request->file('image') ;
+            $extension  = $file->getClientOriginalExtension();
+            $fileName   = $category->id.".".$extension;
+
+            $destinationPath = public_path().'/img/categories' ;
+            $file->move($destinationPath,$fileName);
+            $category->image     =  $fileName;
+            $category->save();
+        } 
 
         Session::flash('success', 'The new category was successfully created!');
 
