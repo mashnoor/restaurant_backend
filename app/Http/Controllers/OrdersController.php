@@ -25,7 +25,7 @@ class OrdersController extends Controller
         $orders = Order::where('user_id',Auth::guard('api')->user()->id)->orderBy('id','DESC')->limit(20)->get();
         $response=array(
             'status'=>1, 
-            'msg'=>'Order Submitted Successfully!',
+            'msg'=>'Success!',
             'data'=>$orders->toArray()
             );
         return response()->json($response);
