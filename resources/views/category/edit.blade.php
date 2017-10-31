@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="row">
-	{!! Form::model($category, ['route' => ['category.update', $category->id], 'method' => 'PUT']) !!}
+	{!! Form::model($category, ['route' => ['category.update', $category->id], 'method' => 'PUT', 'files' => true]) !!}
 		<div class="col-md-8 col-md-offset-1">
 			<h1 class="text-center">Edit Category</h1>
 			<hr>

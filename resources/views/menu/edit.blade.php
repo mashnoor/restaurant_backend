@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="row">
-	{!! Form::model($menu, ['route' => ['menu.update', $menu->id], 'method' => 'PUT']) !!}
+	{!! Form::model($menu, ['route' => ['menu.update', $menu->id], 'method' => 'PUT', 'files' => true]) !!}
 		<div class="col-md-8 col-md-offset-2">
 			<h1 class="text-center">Edit Menu</h1>
 			<hr>

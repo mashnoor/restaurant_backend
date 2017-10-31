@@ -7,7 +7,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<h1 class="text-center">Create New Category</h1>
 			<hr>
-			{!! Form::open(['route' => 'category.store', 'class'=> 'form-horizontal', 'files'=>true]) !!}
+			{!! Form::open(['route' => 'category.store', 'class'=> 'form-horizontal', 'files'=> true]) !!}
 
 				<div class="form-group">
 					{{ Form::label('name', 'Name:', ['class'=>'control-label col-sm-2']) }}

@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $category = New Category;
 
         $category->name = $request->name;
-        $category->image = $request->image;
+        // $category->image = $request->image;
 
         $category->save();
 
@@ -102,15 +102,28 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, array(
-            'name' => 'required'
+            'name' => 'required',
+            'image' =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ));
 
         $category = Category::find($id);
 
         $category->name = $request->name;
-        $category->image = $request->image;
+        // $category->image = $request->image;
 
         $category->save();
+
+        if($file = $request->hasFile('image'))
+        {
+            $file       = $request->file('image') ;
+            $extension  = $file->getClientOriginalExtension();
+            $fileName   = $category->id.".".$extension;
+
+            $destinationPath = public_path().'/img/categories' ;
+            $file->move($destinationPath,$fileName);
+            $category->image     =  $fileName;
+            $category->save();
+        }
 
         Session::flash('success', 'The Category was successfully updated!');
 

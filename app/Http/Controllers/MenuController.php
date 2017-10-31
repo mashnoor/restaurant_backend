@@ -119,7 +119,7 @@ class MenuController extends Controller
             'name'          =>  'required',
             'description'   =>  'required',
             'price'         =>  'required',
-            'image'         =>  'required'
+            'image'         =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ));
 
         $menu = Menu::find($id);
@@ -128,9 +128,22 @@ class MenuController extends Controller
         $menu->name         =   $request->name;
         $menu->description  =   $request->description;
         $menu->price        =   $request->price;
-        $menu->image        =   $request->image;
+        // $menu->image        =   $request->image;
 
         $menu->save();
+
+        if($file = $request->hasFile('image'))
+        {
+            $file       = $request->file('image') ;
+            $extension  = $file->getClientOriginalExtension();
+            $fileName   = $menu->id.".".$extension;
+
+            $destinationPath = public_path().'/img/menus' ;
+            $file->move($destinationPath,$fileName);
+            $menu->image     =  $fileName;
+            $menu->save();
+
+        } 
 
         Session::flash('success', 'The menu was successfully updated!');
 
