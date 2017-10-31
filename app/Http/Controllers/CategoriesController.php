@@ -20,7 +20,16 @@ class CategoriesController extends Controller
         $category_array=array();
         foreach($categories as $category)
         {
-            $category_array[]=array('category_id'=>$category->id,'name'=>$category->name);
+            if($category->image!='')
+                $image = asset('img/categories/'.$category->image);
+            else
+                $image = null;
+
+            $category_array[]=array(
+                    'category_id'=>$category->id,
+                    'name'=>$category->name,
+                    'image'=>$image
+                    );
         }
 
         $response=array(

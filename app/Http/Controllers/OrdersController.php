@@ -160,6 +160,11 @@ class OrdersController extends Controller
             $orderlines=array();
             foreach($order->menus as $menu)
             {
+                if($menu->image!='')
+                    $image = asset('img/menus/'.$menu->image);
+                else
+                    $image = null;
+
                 $orderlines[]=array(
                         'menu_id'=>$menu->id,
                         'code'=>$menu->code,
@@ -167,7 +172,8 @@ class OrdersController extends Controller
                         'quantity'=>$menu->pivot->quantity,
                         'price'=>$menu->pivot->price,
                         'discount'=>$menu->pivot->discount,
-                        'total'=>$menu->pivot->total
+                        'total'=>$menu->pivot->total,
+                        'image'=>$image
                     );
             }
 

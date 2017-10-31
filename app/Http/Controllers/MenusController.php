@@ -51,13 +51,18 @@ class MenusController extends Controller
         $menu=Menu::where('code',$code)->first();
         if(!is_null($menu))
         {
+            if($menu->image!='')
+                $image = asset('img/menus/'.$menu->image);
+            else
+                $image = null;
+
             $item=array(
                     'menu_id'=>$menu->id,
                     'code'=>$menu->code,
                     'name'=>$menu->name,
                     'description'=>$menu->description,
                     'price'=>$menu->price,
-                    'image'=>$menu->image,
+                    'image'=>$image,
                     'available'=>$menu->available,
                 );
 
@@ -127,13 +132,18 @@ class MenusController extends Controller
             $items=array();
             foreach($menus as $menu)
             {
+                if($menu->image!='')
+                    $image = asset('img/menus/'.$menu->image);
+                else
+                    $image = null;
+
                 $items[]=array(
                     'menu_id'=>$menu->id,
                     'code'=>$menu->code,
                     'name'=>$menu->name,
                     'description'=>$menu->description,
                     'price'=>$menu->price,
-                    'image'=>$menu->image,
+                    'image'=>$image,
                     'available'=>$menu->available,
                 );                
             }
