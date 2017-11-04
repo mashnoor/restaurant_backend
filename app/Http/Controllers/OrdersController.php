@@ -104,8 +104,10 @@ class OrdersController extends Controller
             $net_total=floor($amount_after_discount);
             $rounding_discount=number_format($amount_after_discount-$net_total,2);
 
+            $table = Table::where('code',$request->table_code)->first();
+
             $order=new Order;
-            $order->table_id=Table::where('code',$request->table_code)->first()->id;
+            $order->table_id=$table->id;
             $order->type='Table';
             $order->sub_total=$sub_total;
             $order->discount=$invoice_discount;
@@ -116,6 +118,9 @@ class OrdersController extends Controller
             $order->save();
 
             $order->menus()->sync($orderlines);
+
+            $table->status = 'occupied';
+            $table->save();
 
             $response=array(
                 'status'=>1, 

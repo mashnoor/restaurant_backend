@@ -49,7 +49,7 @@ class CashManagerController extends Controller
     if($orderManages->save() && $orderManages->status == 5) {
       $table_id = Order::where('id', $id)->value('table_id');
       $updateTable = Table::find($table_id);
-      $updateTable->status = 0;
+      $updateTable->status = 'free';
       $updateTable->save();
     }
 

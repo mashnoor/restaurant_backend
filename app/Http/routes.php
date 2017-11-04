@@ -29,6 +29,7 @@ Route::group(['prefix'=>'api/'], function() {
 		Route::resource('orders', 'OrdersController');
 		Route::resource('discounts', 'DiscountsController');
 		Route::resource('users', 'UsersController');
+		Route::resource('tables', 'TablesController');
 	});
 });
 

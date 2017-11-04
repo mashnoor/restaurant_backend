@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Table;
+use Auth;
 
 class TablesController extends Controller
 {
@@ -15,7 +15,13 @@ class TablesController extends Controller
      */
     public function index()
     {
-        //
+        $tables = Table::where('user_id',Auth::guard('api')->user()->id)->get();
+        $response=array(
+            'status'=>1, 
+            'msg'=>'Success!',
+            'data'=>$tables->toArray()
+            );
+        return response()->json($response);
     }
 
     /**
