@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Table;
+use App\Helper;
 use Session;
 
 class TableController extends Controller
@@ -29,7 +30,8 @@ class TableController extends Controller
      */
     public function create()
     {
-        return view('table.create');
+        $data['users'] = Helper::userOptions();
+        return view('table.create',$data);
     }
 
     /**
@@ -41,19 +43,23 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'code'      =>  'required|numeric',
-            'capacity'  =>  'required|numeric'
+            'code'      =>  'required',
+            'capacity'  =>  'required|numeric',
+            'user_id'  =>  'required'
         ));
 
         $table = new Table;
         $table->code = $request->code;
         $table->capacity = $request->capacity;
+        $table->status = 'free';
+        $table->user_id = $request->user_id;
 
         $table->save();
 
         Session::flash('success', 'The new table was successfully created!');
 
-        return redirect()->route('table.show', $table->id);
+        return redirect()->route('table.index');
+        // return redirect()->route('table.show', $table->id);
     }
 
     /**
@@ -77,8 +83,8 @@ class TableController extends Controller
     public function edit($id)
     {
         $table = Table::find($id);
-
-        return view('table.edit')->withTable($table);
+        $users = Helper::userOptions();
+        return view('table.edit')->withTable($table)->withUsers($users);
     }
 
     /**
@@ -91,20 +97,24 @@ class TableController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, array(
-            'code'          =>  'required',
-            'capacity'          =>  'required'
+            'code'      =>  'required',
+            'capacity'  =>  'required|numeric',
+            'user_id'   =>  'required'
         ));
 
         $table = Table::find($id);
 
         $table->code        =   $request->code;
         $table->capacity    =   $request->capacity;
+        $table->user_id     = $request->user_id;
 
         $table->save();
 
         Session::flash('success', 'The table was successfully updated!');
 
-        return redirect()->route('table.show', $table->id);
+        return redirect()->route('table.index');
+
+        // return redirect()->route('table.show', $table->id);
     }
 
     /**

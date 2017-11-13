@@ -89,3 +89,11 @@
   </div>
 
 @stop
+
+{{-- <script>
+  $(document).ready(function() {
+    function pageReload() {
+        location.reload();
+    }
+  });
+</script> --}}

@@ -34,6 +34,7 @@ Route::group(['prefix'=>'api/'], function() {
 });
 
 
+Route::resource('user', 'UserController');
 Route::resource('menu', 'MenuController');
 Route::resource('discount', 'DiscountController');
 Route::resource('category', 'CategoryController');
@@ -44,6 +45,7 @@ Route::get('/order/show/{id}', ['as'=> 'order.show', 'uses'=> 'OrderController@s
 Route::get('/order/process/{id}', ['as'=> 'order.process', 'uses'=> 'OrderController@orderProcess']);
 Route::get('/order/serve/{id}', ['as'=> 'order.serve', 'uses'=> 'OrderController@orderServe']);
 Route::get('/pantry', 'PantryController@index');
+Route::get('/pantry/show/{id}', ['as'=> 'pantry.show', 'uses'=> 'OrderController@show']);
 
 Route::get('/order/manages', ['as'=> 'order.manages', 'uses'=> 'CashManagerController@orderManages']);
 Route::get('/order/showCash/{id}', ['as'=> 'order.showCash', 'uses'=> 'CashManagerController@showCash']);
@@ -53,3 +55,9 @@ Route::post('/order/getPaymentModes/{id}', ['as'=> 'order.getPaymentModes', 'use
 Route::get('/order/available',  'AvailableMenuController@showAvailableMenus');
 Route::get('/order/availables/{id}', ['as'=> 'order.availables', 'uses'=> 'AvailableMenuController@availableMenus']);
 Route::get('/order/unavailable/{id}', ['as'=> 'order.unavailable', 'uses'=> 'AvailableMenuController@unavailableMenus']);
+
+// Daily Sales Report
+Route::get('reports', ['as' => 'daily.reports', 'uses' => 'ReportsController@index']);
+Route::post('reportDownload', ['as' => 'download.reports', 'uses' => 'ReportsController@reportDownload']);
+Route::get('storeReports', ['as' => 'store.report', 'uses' => 'ReportsController@storeReports']);
+Route::post('categoryWiseReport', ['as' => 'categorywise.reports', 'uses' => 'ReportsController@categoryWiseReport']);

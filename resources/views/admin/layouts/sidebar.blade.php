@@ -26,6 +26,18 @@
       <div class="menu_section">
         <h3>Admin Panel</h3>
         <ul class="nav side-menu">
+
+          <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="display: none">
+              <li>
+                <a href="{{ URL::route('user.index') }}">All Users</a>
+              </li>
+              <li>
+                <a href="{{ URL::route('user.create') }}">Create user</a>
+              </li>
+            </ul>
+          </li>
+
           <li><a><i class="fa fa-home"></i> Menu <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
               <li>
@@ -36,6 +48,7 @@
               </li>
             </ul>
           </li>
+
           <li><a><i class="fa fa-percent"></i> Discount <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
               <li>
@@ -46,6 +59,7 @@
               </li>
             </ul>
           </li>
+
           <li><a><i class="fa fa-list-ul"></i> Category <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
               <li>
@@ -56,35 +70,39 @@
               </li>
             </ul>
           </li>
+
           <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
-              <li><a href="{{ URL::route('table.index') }}">Tables</a>
-              </li>
-              <li><a href="{{ URL::route('table.create') }}">Create Table</a>
-              </li>
+              <li><a href="{{ URL::route('table.index') }}">Tables</a></li>
+              <li><a href="{{ URL::route('table.create') }}">Create Table</a></li>
             </ul>
           </li>
+
           <li><a><i class="fa fa-cutlery"></i> Kitchen <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
-              <li><a href="{{ URL::to('/order') }}">Order Process</a>
-              </li>
-              <li>
-                <a href="{{ URL::to('/order/available') }}">Off Menus</a>
-              </li>
+              <li><a href="{{ URL::to('/order') }}">Order Process</a></li>
+              <li><a href="{{ URL::to('/order/available') }}">Off Menus</a></li>
             </ul>
           </li>
+
           <li><a><i class="fa fa-cutlery"></i> Pantry <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
-              <li><a href="{{ URL::to('/pantry') }}">All Orders</a>
-              </li>
+              <li><a href="{{ URL::to('/pantry') }}">Pantry Orders</a></li>
             </ul>
           </li>
+
           <li><a><i class="fa fa-cogs"></i> Manager <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none">
-              <li><a href="{{ URL::to('/order/manages') }}">Manage Orders</a>
-              </li>
+              <li><a href="{{ URL::to('/order/manages') }}">Manage Orders</a></li>
             </ul>
           </li>
+
+          <li><a><i class="fa fa-line-chart"></i> Daily Report <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="display: none">
+              <li><a href="{{ URL::to('reports') }}">Daily Reports</a></li>
+            </ul>
+          </li>
+
         </ul>
       </div>
 

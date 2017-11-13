@@ -23,6 +23,8 @@
 					<th>ID</th>
 					<th>Code</th>
 					<th>Capacity</th>
+					<th>User Name</th>
+					<th>Status</th>
 					<th></th>
 				</thead>
 				<tbody>
@@ -31,6 +33,8 @@
 						<th>{{ $table->id }}</th>
 						<td>{{ $table->code }}</td>
 						<td>{{ $table->capacity }}</td>
+						<td>{{ $table->user->name }}</td>
+						<td>{{ $table->status }}</td>
 						<td>
 							<a href="{{ route('table.show', $table->id) }}" class="btn btn-primary btn-sm">View</a>
 							<a href="{{ route('table.edit', $table->id) }}" class="btn btn-primary btn-sm">Edit</a>
@@ -46,7 +50,7 @@
 			</table>
 
 			<div class="text-center">
-				{{-- {!! $table->links() !!} --}}
+				{!! $tables->links() !!}
 				{{-- {!! $menus->render() !!} It's another method for pagination --}}
 			</div>
 

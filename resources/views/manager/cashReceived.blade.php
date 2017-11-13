@@ -39,36 +39,34 @@
             <td colspan="4" width="80%">Total Amount</td>
             <td width="20%">{{ $grandTotal }}</td>
           </tr>
-          <tr>
-
-            {{ Form::open(['method' => 'post', 'route' => ['order.getPaymentModes', $orderManages->id]]) }}
-            <td>
-              <div class="form-group">
-                {{ Form::label('cash_received', 'Discount Cash:', ['class'=> 'control-label']) }}
-                <div class="col-sm-10">
-                  {{ Form::number('cash_received', null, ['class' => 'form-control cash']) }}
-                  {{ Form::hidden('id', $orderManages->id) }}
-                  {{ Form::hidden('nettotal', $grandTotal) }}
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="form-group">
-                {{ Form::label('payment_modes', 'Payment Mode:', ['class'=> 'control-label col-sm-2']) }}
-                <div class="col-sm-10">
-                    {{ Form::select('payment_modes', App\Helper::getPaymentModes(), null, ['class' => 'form-control']) }}  
-                </div>
-              </div>
-            </td>
-            <tr>
-              <td>{{ Form::submit('Cash Receive', ['class' => 'btn btn-success pull-right']) }}</td>
-            </tr>
-            
-            {{ Form::close() }}
-          </tr>
         </tbody>
       </table>
-
+      <table width="100%" class="table table-hover">
+        <tbody>
+          <tr>
+            {{ Form::open(['method' => 'post', 'route' => ['order.getPaymentModes', $orderManages->id]]) }}
+            <td width="15%" style="vertical-align: middle;">
+              {{ Form::label('cash_received', 'Discount Cash:', ['class'=> 'control-label']) }}
+            </td>
+            <td width="35%" style="vertical-align: middle;">
+              {{ Form::number('cash_received', null, ['class' => 'form-control cash']) }}
+              {{ Form::hidden('id', $orderManages->id) }}
+              {{ Form::hidden('nettotal', $grandTotal) }}</td>
+            <td width="15%" style="vertical-align: middle;">
+              {{ Form::label('payment_modes', 'Payment Mode:', ['class'=> 'control-label']) }}
+            </td>
+            <td width="35%" style="vertical-align: middle;">
+              {{ Form::select('payment_modes', App\Helper::getPaymentModes(), null, ['class' => 'form-control']) }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align: center; padding-top: 40px;">
+              {{ Form::submit('Cash Receive', ['class' => 'btn btn-success']) }}
+            </td>
+          </tr>
+          {{ Form::close() }}
+        </tbody>
+      </table>
     </div>
   </div>
 

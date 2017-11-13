@@ -5,7 +5,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<h1 class="text-center">Order Details</h1>
+			<h1 class="text-center">Pantry Order Details</h1>
 			<div class="col-md-10 col-md-offset-1">
 				<hr>
 			</div>
@@ -35,7 +35,7 @@
 			<table class="table text-right">
 				<tr>
 					<td>
-						<a href="{{ URL::to('/order') }}" class="btn btn-primary btn-lg">Back</a>
+						<a href="{{ URL::to('/pantry') }}" class="btn btn-primary btn-lg">Back</a>
 					</td>
 				</tr>
 			</table>

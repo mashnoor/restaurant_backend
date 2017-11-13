@@ -25,6 +25,14 @@
 				</div>
 			</div>
 
+			<div class="form-group">
+				{{ Form::label('user_id', 'Select User :', ['class'=>'control-label col-sm-2']) }}
+				<div class="col-sm-10">
+					{{ Form::select('user_id', $users, null, ['class' => 'form-control']) }}
+					<span class="small text-danger">{{ $errors->first('user_id') }}</span>
+				</div>
+			</div>
+
 			{!! Html::linkRoute('table.show', 'Cancel', [$table->id], ['class' => 'btn btn-danger pull-right']) !!}
 			{!! Form::submit('Saves Changes', ['class' => 'btn btn-success pull-right']) !!}
 

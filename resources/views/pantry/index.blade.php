@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<h1 class="text-center">All Orders</h1>
+			<h1 class="text-center">All Pantry Orders</h1>
 		</div>
 		<div class="col-md-10 col-md-offset-1">
 			<hr>
@@ -27,8 +27,8 @@
 					<th>Order Time</th>
 					<th>Status</th>
 					<th>View</th>
-					<th>Process</th>
-					<th>Serve</th>
+					{{-- <th>Process</th>
+					<th>Serve</th> --}}
 				</thead>
 				<tbody>
 				@foreach ($pantrys as $pantry)
@@ -57,9 +57,9 @@
 							@endif
 						</td>
 						<td>							
-							<a href="{{ route('order.show', $pantry->id) }}" class="btn btn-primary btn-sm">View</a>
+							<a href="{{ route('pantry.show', $pantry->id) }}" class="btn btn-primary btn-sm">View</a>
 						</td>
-						@if ($pantry->status == 2)
+						{{-- @if ($pantry->status == 2)
 							<td>------</td>
 							<td>
 								<a href="{{ route('order.serve', $pantry->id) }}" class="btn btn-success btn-sm">Serve</a>
@@ -72,7 +72,7 @@
 						@elseif ($pantry->status == 3 || 4)
 							<td>------</td>
 							<td>------</td>
-						@endif
+						@endif --}}
 					</tr>
 				@endforeach					
 				</tbody>
