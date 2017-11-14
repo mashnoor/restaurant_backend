@@ -24,6 +24,7 @@ Route::group(['prefix'=>'api/'], function() {
 	Route::post('login',['as'=>'users.login','uses'=>'UsersController@login']);
 	Route::group(['middleware'=>'auth:api'], function() {
 		Route::get('menus/categorywise/{category_id}',['as'=>'menus.categorywise','uses'=>'MenusController@category_wise_menus']);
+		Route::get('orders/summary',['as'=>'orders.summary','uses'=>'OrdersController@summary']);
 		Route::resource('categories', 'CategoriesController');
 		Route::resource('menus', 'MenusController');
 		Route::resource('orders', 'OrdersController');

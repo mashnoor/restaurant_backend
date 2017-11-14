@@ -22,7 +22,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id',Auth::guard('api')->user()->id)->orderBy('id','DESC')->limit(20)->get();
+        $orders = Order::where('user_id',Auth::guard('api')->user()->id)->whereDate('created_at','=',date('Y-m-d'))->orderBy('id','DESC')->limit(20)->get();
         $response=array(
             'status'=>1, 
             'msg'=>'Success!',
@@ -299,5 +299,17 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function summary()
+    {
+        $orders = Order::where('user_id',Auth::guard('api')->user()->id)->whereDate('created_at','=',date('Y-m-d'))->where('status',5)->get();
+
+        $response=array(
+            'status'=>1, 
+            'msg'=>'Success!',
+            'data'=>array('order_count'=>$orders->count(),'order_value'=>$orders->sum('net_total'))
+            );
+        return response()->json($response);        
     }
 }

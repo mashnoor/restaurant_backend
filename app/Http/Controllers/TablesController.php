@@ -15,7 +15,7 @@ class TablesController extends Controller
      */
     public function index()
     {
-        $tables = Table::where('user_id',Auth::guard('api')->user()->id)->get();
+        $tables = Table::all();
         $response=array(
             'status'=>1, 
             'msg'=>'Success!',
