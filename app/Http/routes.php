@@ -49,7 +49,8 @@ Route::get('/pantry/show/{id}', ['as'=> 'pantry.show', 'uses'=> 'OrderController
 
 Route::get('/order/manages', ['as'=> 'order.manages', 'uses'=> 'CashManagerController@orderManages']);
 Route::get('/order/showCash/{id}', ['as'=> 'order.showCash', 'uses'=> 'CashManagerController@showCash']);
-Route::get('/order/billSubmit/{id}', ['as'=> 'order.billSubmit', 'uses'=> 'CashManagerController@billSubmit']);
+Route::post('/order/billSubmit', ['as'=> 'order.billSubmit', 'uses'=> 'CashManagerController@billSubmit']);
+Route::get('/order/printInvoice/{id}', ['as'=> 'order.printInvoice', 'uses'=> 'CashManagerController@printInvoice']);
 Route::get('/order/cashReceived/{id}', ['as'=> 'order.cashReceived', 'uses'=> 'CashManagerController@cashReceived']);
 Route::post('/order/getPaymentModes/{id}', ['as'=> 'order.getPaymentModes', 'uses'=> 'CashManagerController@getPaymentModes']);
 Route::get('/order/available',  'AvailableMenuController@showAvailableMenus');

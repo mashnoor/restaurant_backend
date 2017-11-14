@@ -60,7 +60,9 @@
             </td>
             @if ($orderManage->status == 3)
               <td>
-                <a target="_blank" href="{{ route('order.billSubmit', $orderManage->id) }}" class="btn btn-info btn-sm">Submit Bill</a>
+                {{-- <a target="_blank" href="{{ route('order.billSubmit', $orderManage->id) }}" onclick="window.location.reload(true)" class="btn btn-info btn-sm">Submit Bill</a> --}}
+
+                <a  style="cursor: pointer;"  class="btn btn-info btn-sm PrintInvoice"  data-printinvoice="{{ $orderManage->id }}">Submit Bill</a>
               </td>
             @elseif ($orderManage->status == 4)
               <td>
@@ -88,12 +90,38 @@
     </div>
   </div>
 
+<script>
+  $(document).ready(function() {
+    // function reload() {
+    //   window.location.reload(true)
+    // }  
+
+    $(".PrintInvoice").click(function(){
+    // for editing
+      var id=$(this).data("printinvoice");  
+      var token = '{{ csrf_token() }}';  
+      $.ajax({    
+        type:'POST',
+        url:'{{url()->route("order.billSubmit")}}',
+        data:{id: id, _token:token},
+        success:function(response){
+          if(response.status == 1)
+          {
+            var redirect = window.open('{{ url()->route("order.printInvoice","") }}/'+response.id,'_blank');
+            redirect.location;
+            window.focus();
+            window.location.href=window.location.href;
+          }
+          else
+          {
+            alert('Something went wrong!');
+          }
+        }
+      });
+    });
+
+  });
+</script>
+
 @stop
 
-{{-- <script>
-  $(document).ready(function() {
-    function pageReload() {
-        location.reload();
-    }
-  });
-</script> --}}

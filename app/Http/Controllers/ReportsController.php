@@ -63,6 +63,7 @@ class ReportsController extends Controller
     }
   
     $cel_no = 9 + $i + 1;
+    $celPlus = 'C'.$cel_no;
     $cel_no_vat = 'E'.$cel_no;
     $cel_no_discount = 'F'.$cel_no;
     $cel_no_sub_total = 'D'.$cel_no;
@@ -70,12 +71,11 @@ class ReportsController extends Controller
 
 
     // Generate and return the spreadsheet
-    Excel::create('DailyReport', function($excel) use ($paymentsArray, $cel_no_vat,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {        
+    Excel::create('DailyReport', function($excel) use ($paymentsArray, $celPlus, $cel_no_vat,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {        
 
       // Build the spreadsheet, passing in the payments array
-      $excel->sheet('Daily Report', function($sheet) use ($paymentsArray, $cel_no_vat,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {
+      $excel->sheet('Daily Report', function($sheet) use ($paymentsArray, $celPlus, $cel_no_vat,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {
         $sheet->fromArray($paymentsArray, null, 'A9', false, false);
-        //$sheet->fromArray($total_cash, null, 'G18', false, false);
 
         $sheet->mergeCells('A1:G1', function($cells) {
 
@@ -136,6 +136,11 @@ class ReportsController extends Controller
           $cells->setFontWeight('bold');
           $cells->setAlignment('center');
           $cells->setFontFamily('Times New Roman');
+        });
+
+        $sheet->cell($celPlus, function($cell) {
+            $cell->setValue('Grand Total :');
+            $cell->setFontWeight('bold');
         });
           
         $sheet->cells($cel_no_sub_total, function($cells) use ($total_sub_total) {

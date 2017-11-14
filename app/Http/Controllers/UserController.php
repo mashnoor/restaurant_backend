@@ -99,9 +99,9 @@ class UserController extends Controller
   {
     $this->validate($request, array(
       'name'      =>  'required',
-      'username'  =>  'required|unique:users,username',
+      'username'  =>  'required',
       'user_type' =>  'required',
-      // 'password'  =>  'required|min:4',
+      'password'  =>  'required|min:4',
 
     ));
 
@@ -110,7 +110,7 @@ class UserController extends Controller
     $user->name         =   $request->name;
     $user->username     =   $request->username;
     $user->user_type    =   $request->user_type;
-    // $user->password     = md5($request->password);
+    $user->password     = md5($request->password);
 
     $user->save();
 
