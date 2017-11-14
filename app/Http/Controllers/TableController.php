@@ -30,8 +30,8 @@ class TableController extends Controller
      */
     public function create()
     {
-        $data['users'] = Helper::userOptions();
-        return view('table.create',$data);
+        // $data['users'] = Helper::userOptions();
+        return view('table.create');
     }
 
     /**
@@ -44,15 +44,15 @@ class TableController extends Controller
     {
         $this->validate($request, array(
             'code'      =>  'required',
-            'capacity'  =>  'required|numeric',
-            'user_id'  =>  'required'
+            'capacity'  =>  'required|numeric'
+            // 'user_id'  =>  'required'
         ));
 
         $table = new Table;
         $table->code = $request->code;
         $table->capacity = $request->capacity;
         $table->status = 'free';
-        $table->user_id = $request->user_id;
+        // $table->user_id = $request->user_id;
 
         $table->save();
 
@@ -83,8 +83,8 @@ class TableController extends Controller
     public function edit($id)
     {
         $table = Table::find($id);
-        $users = Helper::userOptions();
-        return view('table.edit')->withTable($table)->withUsers($users);
+        // $users = Helper::userOptions();
+        return view('table.edit')->withTable($table);
     }
 
     /**
@@ -99,14 +99,14 @@ class TableController extends Controller
         $this->validate($request, array(
             'code'      =>  'required',
             'capacity'  =>  'required|numeric',
-            'user_id'   =>  'required'
+            // 'user_id'   =>  'required'
         ));
 
         $table = Table::find($id);
 
         $table->code        =   $request->code;
         $table->capacity    =   $request->capacity;
-        $table->user_id     = $request->user_id;
+        // $table->user_id     = $request->user_id;
 
         $table->save();
 

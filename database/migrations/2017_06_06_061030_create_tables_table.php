@@ -16,7 +16,6 @@ class CreateTablesTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->tinyInteger('capacity');
-            $table->integer('user_id');
             $table->enum('status',['free','occupied','booked']);
             $table->timestamps();
         });

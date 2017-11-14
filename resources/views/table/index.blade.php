@@ -23,7 +23,7 @@
 					<th>ID</th>
 					<th>Code</th>
 					<th>Capacity</th>
-					<th>User Name</th>
+					{{-- <th>Table User</th> --}}
 					<th>Status</th>
 					<th></th>
 				</thead>
@@ -33,13 +33,13 @@
 						<th>{{ $table->id }}</th>
 						<td>{{ $table->code }}</td>
 						<td>{{ $table->capacity }}</td>
-						<td>{{ $table->user->name }}</td>
+						{{-- <td>{{ $table->user->name }}</td> --}}
 						<td>{{ $table->status }}</td>
 						<td>
 							<a href="{{ route('table.show', $table->id) }}" class="btn btn-primary btn-sm">View</a>
 							<a href="{{ route('table.edit', $table->id) }}" class="btn btn-primary btn-sm">Edit</a>
 
-							{!! Form::open(['method' => 'DELETE', 'route' => ['table.destroy', $table->id], 'style' => 'display:inline']) !!}
+							{!! Form::open(['method' => 'DELETE', 'route' => ['table.destroy', $table->id],'onsubmit' => 'return confirm("Are you sure you want to delete?")', 'style' => 'display:inline']) !!}
 								{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
 
 							{!! Form::close() !!}

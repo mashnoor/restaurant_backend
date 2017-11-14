@@ -41,7 +41,7 @@
 								<a href="{{ route('user.edit', $user->id ) }}" class="btn btn-primary">Edit</a>
 							</td>
 							<td>
-								{!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id], 'style' => 'display:inline']) !!}
+								{!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id], 'onsubmit' => 'return confirm("Are you sure you want to delete?")', 'style' => 'display:inline']) !!}
 									{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 
 								{!! Form::close() !!}
@@ -55,5 +55,19 @@
 			</div>
 		</div>
 	</div>
+
+{{-- <script>
+	$(document).ready(function() {
+		function confirm()
+	  {
+	  var x = confirm("Are you sure you want to delete?");
+	  if (x)
+	    return true;
+	  else
+	    return false;
+	  }
+   
+	});
+</script> --}}
 
 @stop

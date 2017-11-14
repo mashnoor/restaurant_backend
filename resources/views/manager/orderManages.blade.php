@@ -102,7 +102,7 @@
       var token = '{{ csrf_token() }}';  
       $.ajax({    
         type:'POST',
-        url:'{{url()->route("order.billSubmit")}}',
+        url:'{{ url()->route("order.billSubmit") }}',
         data:{id: id, _token:token},
         success:function(response){
           if(response.status == 1)
@@ -119,6 +119,11 @@
         }
       });
     });
+
+    setTimeout(function(){
+    location.reload();
+
+    },5000);
 
   });
 </script>

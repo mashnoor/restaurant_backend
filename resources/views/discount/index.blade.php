@@ -42,7 +42,7 @@
 								<a href="{{ route('discount.show', $discount->id) }}" class="btn btn-primary btn-sm">View</a>
 								<a href="{{ route('discount.edit', $discount->id) }}" class="btn btn-primary btn-sm">Edit</a>
 								
-								{!! Form::open(['method' => 'DELETE', 'route' => ['discount.destroy', $discount->id], 'style' => 'display:inline']) !!}
+								{!! Form::open(['method' => 'DELETE', 'route' => ['discount.destroy', $discount->id], 'onsubmit' => 'return confirm("Are you sure you want to delete?")', 'style' => 'display:inline']) !!}
 								{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
 
 								{!! Form::close() !!}

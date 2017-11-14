@@ -49,8 +49,11 @@ class ReportsController extends Controller
      $total_vat = 0;
      $total_sub_total = 0;
      $i = 0;
+      $s = 0; 
+     $reportSummery = [];
+    
     foreach ($reports as $report) {
-        
+        $s++;
         $ex_data = $report->toArray();    
         $ex_data['payment_modes'] = Helper::getPaymentModes()[$ex_data['payment_modes']];
         $paymentsArray[] = $ex_data;
@@ -59,10 +62,50 @@ class ReportsController extends Controller
         $total_vat += $report->vat;
         $total_sub_total += $report->sub_total;
 
+        // $reportSummery = array();
+        if(array_key_exists($ex_data['payment_modes'] , $reportSummery))
+          {
+            foreach ($reportSummery as $i => $val) {       
+              if ($i == $ex_data['payment_modes']) {            
+                $reportSummery[$i] = $reportSummery[$i] + $report->cash_received;          
+              }
+            }
+          }
+        else
+          {
+            $reportSummery[$ex_data['payment_modes']] = $report->cash_received; 
+          }
+
         $i++;
     }
-  
-    $cel_no = 9 + $i + 1;
+
+    $reportSummeryArray = array();
+    $m=0;
+    foreach($reportSummery as $ekey=>$eval)
+    {
+      $reportSummeryArray[]=array(0=>$ekey,1=>$eval);
+      $m++;
+
+    }
+ //return $reportSummeryArray;
+
+    $cel_no = 9 + $s + 1;
+    $cel_no2 = 11 + $s + $m + 2;
+    $cel_collection = 'C'.$cel_no2;
+    $cel_collection_valu = 'D'.$cel_no2;
+    $celGrand = $cel_no + 2;
+    $celS = $cel_no + 3;
+    $celHeading = 'C'.$celGrand;
+    $celModes1 = 'C'.$celS;
+    $celModes2 = 'C'.($celS+1);
+    $celModes3 = 'C'.($celS+2);
+    $celModes4 = 'C'.($celS+3);
+
+    $celModes1_value = 'D'.$celS;
+    $celModes2_value = 'D'.($celS+1);
+    $celModes3_value = 'D'.($celS+2);
+    $celModes4_value = 'D'.($celS+3);
+
     $celPlus = 'C'.$cel_no;
     $cel_no_vat = 'E'.$cel_no;
     $cel_no_discount = 'F'.$cel_no;
@@ -71,11 +114,12 @@ class ReportsController extends Controller
 
 
     // Generate and return the spreadsheet
-    Excel::create('DailyReport', function($excel) use ($paymentsArray, $celPlus, $cel_no_vat,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {        
+    Excel::create('DailyReport', function($excel) use ($paymentsArray, $cel_no_vat,$celPlus,$celHeading,$celModes1,$celModes2,$celModes3,$celModes4,$celModes1_value,$celModes2_value,$celModes3_value,$celModes4_value,$cel_collection,$cel_collection_valu,$reportSummeryArray,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {        
 
       // Build the spreadsheet, passing in the payments array
-      $excel->sheet('Daily Report', function($sheet) use ($paymentsArray, $celPlus, $cel_no_vat,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {
+      $excel->sheet('Daily Report', function($sheet) use ($paymentsArray, $cel_no_vat,$celPlus,$celHeading,$celModes1,$celModes2,$celModes3,$celModes4,$celModes1_value,$celModes2_value,$celModes3_value,$celModes4_value,$cel_collection,$cel_collection_valu,$reportSummeryArray,$cel_no_discount,$cel_no_sub_total,$cel_no_total,$total_cash,$total_discount,$total_vat,$total_sub_total) {
         $sheet->fromArray($paymentsArray, null, 'A9', false, false);
+        
 
         $sheet->mergeCells('A1:G1', function($cells) {
 
@@ -131,7 +175,8 @@ class ReportsController extends Controller
         $sheet->cell('C5', function($cell) {
             $cell->setValue(date('d-M-Y'));
         });
-
+        
+        $sheet->setBorder('A9:G9', 'thin');
         $sheet->cells('A9:G9', function($cells) {
           $cells->setFontWeight('bold');
           $cells->setAlignment('center');
@@ -139,10 +184,102 @@ class ReportsController extends Controller
         });
 
         $sheet->cell($celPlus, function($cell) {
-            $cell->setValue('Grand Total :');
-            $cell->setFontWeight('bold');
+          $cell->setValue('Grand Total :');
+          $cell->setFontWeight('bold');
         });
-          
+
+        $sheet->cell($celHeading, function($cell) {
+          $cell->setValue('Payments Mode');
+          $cell->setFontWeight('bold');
+        });
+        
+        $t = 1;
+        foreach ($reportSummeryArray as $key => $value) {
+        
+          $val_0 = $value[0];
+          $val_1 = $value[1];
+          if ($t == 1)
+          {
+            $sheet->cells($celModes1, function($cells) use ($val_0) {
+              $cells->setValue($val_0); 
+              $cells->setFontWeight('bold');
+              $cells->setAlignment('center');
+              $cells->setFontFamily('Times New Roman');
+            });
+
+            $sheet->cells($celModes1_value, function($cells) use ($val_1) {
+              $cells->setValue($val_1); 
+              $cells->setFontWeight('bold');
+              $cells->setAlignment('center');
+              $cells->setFontFamily('Times New Roman');
+            }); 
+          }
+          if ($t == 2)
+          {
+            $sheet->cells($celModes2, function($cells) use ($val_0) {
+              $cells->setValue($val_0); 
+              $cells->setFontWeight('bold');
+              $cells->setAlignment('center');
+              $cells->setFontFamily('Times New Roman');
+            });
+
+            $sheet->cells($celModes2_value, function($cells) use ($val_1) {
+              $cells->setValue($val_1); 
+              $cells->setFontWeight('bold');
+              $cells->setAlignment('center');
+              $cells->setFontFamily('Times New Roman');
+            }); 
+          }
+        if ($t == 3)
+          {
+          $sheet->cells($celModes3, function($cells) use ($val_0) {
+            $cells->setValue($val_0); 
+            $cells->setFontWeight('bold');
+            $cells->setAlignment('center');
+            $cells->setFontFamily('Times New Roman');
+          });
+
+          $sheet->cells($celModes3_value, function($cells) use ($val_1) {
+            $cells->setValue($val_1); 
+            $cells->setFontWeight('bold');
+            $cells->setAlignment('center');
+            $cells->setFontFamily('Times New Roman');
+          }); 
+        }
+        if ($t == 4)
+          {
+          $sheet->cells($celModes4, function($cells) use ($val_0) {
+            $cells->setValue($val_0); 
+            $cells->setFontWeight('bold');
+            $cells->setAlignment('center');
+            $cells->setFontFamily('Times New Roman');
+          });
+
+          $sheet->cells($celModes4_value, function($cells) use ($val_1) {
+            $cells->setValue($val_1); 
+            $cells->setFontWeight('bold');
+            $cells->setAlignment('center');
+            $cells->setFontFamily('Times New Roman');
+          }); 
+        }
+
+        $t++;
+        }
+        
+        $sheet->cells($cel_collection, function($cells) {
+          $cells->setValue('Total Collection'); 
+          $cells->setFontWeight('bold');
+          $cells->setAlignment('center');
+          $cells->setFontFamily('Times New Roman');
+        });
+        
+        $sheet->cells($cel_collection_valu, function($cells) use ($total_cash) {
+          $cells->setValue($total_cash); 
+          $cells->setFontWeight('bold');
+          $cells->setAlignment('center');
+          $cells->setFontFamily('Times New Roman');
+        });
+
         $sheet->cells($cel_no_sub_total, function($cells) use ($total_sub_total) {
           $cells->setValue($total_sub_total); 
           $cells->setFontWeight('bold');
@@ -155,7 +292,7 @@ class ReportsController extends Controller
           $cells->setAlignment('center');
           $cells->setFontFamily('Times New Roman');
         });
-        $sheet->cells($cel_no_discount, function($cells) use ($total_discount) {
+        $sheet->cells( $cel_no_discount, function($cells) use ($total_discount) {
           $cells->setValue($total_discount); 
           $cells->setFontWeight('bold');
           $cells->setAlignment('center');

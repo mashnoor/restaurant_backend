@@ -32,7 +32,7 @@
 							<td>
 								<a href="{{ route('category.show', $category->id ) }}" class="btn btn-primary btn-sm">View</a>
 								<a href="{{ route('category.edit', $category->id ) }}" class="btn btn-primary btn-sm">Edit</a>
-								{!! Form::open(['method' => 'DELETE', 'route' => ['category.destroy', $category->id], 'style' => 'display:inline']) !!}
+								{!! Form::open(['method' => 'DELETE', 'route' => ['category.destroy', $category->id], 'onsubmit' => 'return confirm("Are you sure you want to delete?")', 'style' => 'display:inline']) !!}
 								{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
 
 								{!! Form::close() !!}
