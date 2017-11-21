@@ -7,6 +7,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<h1 class="text-center">Order Details</h1>
 			<div class="col-md-10 col-md-offset-1">
+				<p style="text-align: right;"><strong>Waiter Name: {{ $order->waiterName->name }}</strong></p>
 				<hr>
 			</div>
 			<table class="table table-hover">

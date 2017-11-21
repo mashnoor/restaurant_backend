@@ -13,7 +13,7 @@ class PantryController extends Controller
 {
   public function index()
   {
-    $pantrys = Order::orderBy('id', 'desc')->paginate(10);
+    $pantrys = Order::where('status','>=',1)->orderBy('id', 'desc')->paginate(30);
 
     return view('pantry.index')->withPantrys($pantrys);
   }

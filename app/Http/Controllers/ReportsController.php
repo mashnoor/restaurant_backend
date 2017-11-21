@@ -15,7 +15,7 @@ class ReportsController extends Controller
 
   public function index()
   {
-    $reports = Order::whereStatus(5)->orderBy('id','desc')->paginate(10);
+    $reports = Order::whereStatus(5)->orderBy('id','desc')->paginate(50);
     return view('report.reports')->withReports($reports);
   }
 

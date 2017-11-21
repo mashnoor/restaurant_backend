@@ -51,8 +51,6 @@
                 Print Invoice
               @elseif ($orderManage->status == 5)
                 Cash Received
-              {{-- @elseif ($orderManage->status == 6)
-                Order Complete --}}
               @endif
             </td>
             <td>              
@@ -72,11 +70,7 @@
               <td>
                 <a href="" class="btn btn-success btn-sm">Complete</a>
               </td>
-              {{-- <td>
-                <a href="{{ route('order.orderComplete', $orderManage->id) }}" class="btn btn-info btn-sm">Complete</a>
-              </td> --}}
-            {{-- @elseif ($orderManage->status == 6)
-              <td>Complet</td> --}}
+              
             @endif
           </tr>
         @endforeach         
@@ -91,13 +85,10 @@
   </div>
 
 <script>
-  $(document).ready(function() {
-    // function reload() {
-    //   window.location.reload(true)
-    // }  
+  $(document).ready(function() { 
 
     $(".PrintInvoice").click(function(){
-    // for editing
+    
       var id=$(this).data("printinvoice");  
       var token = '{{ csrf_token() }}';  
       $.ajax({    
@@ -120,10 +111,10 @@
       });
     });
 
-    setTimeout(function(){
-    location.reload();
+    // setTimeout(function(){
+    // location.reload();
 
-    },5000);
+    // },5000);
 
   });
 </script>

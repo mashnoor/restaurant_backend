@@ -13,7 +13,7 @@ class CashManagerController extends Controller
 {
   public function orderManages()
   {
-    $ordermanages = Order::orderBy('id', 'desc')->paginate(10);
+    $ordermanages = Order::where('status','>=',1)->orderBy('id', 'desc')->paginate(30);
     return view('manager.orderManages')->withOrdermanages($ordermanages);
 
     // $ordermanages = Order::where('status', '>', 2)->get();

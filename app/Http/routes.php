@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+	return view('login');
 });
 
 Route::get('/admin', function () {
@@ -33,6 +34,12 @@ Route::group(['prefix'=>'api/'], function() {
 		Route::resource('tables', 'TablesController');
 	});
 });
+
+
+// User login
+Route::get('logins', ['as' => 'user.login', 'uses' => 'LoginAdminController@getLogin']);
+Route::post('logins', ['as' => 'user.postLogin', 'uses' => 'LoginAdminController@postLogin']);
+Route::get('logout', ['as' => 'user.logout', 'uses' => 'LoginAdminController@getLogout']);
 
 
 Route::resource('user', 'UserController');

@@ -24,4 +24,10 @@ class Order extends Model
     {
         return $this->belongsTo('App\Table');
     }
+
+
+    public function waiterName()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 }

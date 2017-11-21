@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use App\Helper;
+use Hash;
 use Session;
 
 class UserController extends Controller
@@ -53,7 +54,7 @@ class UserController extends Controller
     $user->name         =   $request->name;
     $user->username     =   $request->username;
     $user->user_type    =   $request->user_type;
-    $user->password     = md5($request->password);
+    $user->password     =   Hash::make($request->password);
 
     $user->save();
 
@@ -110,7 +111,7 @@ class UserController extends Controller
     $user->name         =   $request->name;
     $user->username     =   $request->username;
     $user->user_type    =   $request->user_type;
-    $user->password     = md5($request->password);
+    $user->password     =   Hash::make($request->password);
 
     $user->save();
 
