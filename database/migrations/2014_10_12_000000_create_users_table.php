@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->enum('user_type',['manager','kitchen','waiter']);
             $table->string('password');
             $table->string('api_token',60)->unique()->nullable();
+            $table->string('token');
             $table->rememberToken();
             $table->timestamps();
         });

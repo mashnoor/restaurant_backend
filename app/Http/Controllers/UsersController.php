@@ -94,7 +94,8 @@ class UsersController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'token'=>'required',
         ]);
 
         if($validator->fails())
@@ -107,12 +108,14 @@ class UsersController extends Controller
         }
         else
         {
-            if(Auth::once($request->all())) 
+            $credentials = array('username'=>$request->username,'password'=>$request->password);
+            if(Auth::once($credentials)) 
             {
                 $api_token=str_random(9);
                 $user=Auth::user();
                 $api_token.=$user->id;
                 $user->api_token=$api_token;
+                $user->token=$request->token;
                 $user->save();
 
                 $response=array(
