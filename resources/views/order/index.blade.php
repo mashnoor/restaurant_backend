@@ -90,7 +90,7 @@
 	setTimeout(function(){
 	  location.reload();
 
-	},5000);
+	},60000);
 
 </script>
 

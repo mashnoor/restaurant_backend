@@ -43,7 +43,7 @@ class MenuController extends Controller
     {
         $this->validate($request, array(
             'category_id'   => 'required',
-            'code'          =>  'required|numeric',
+            'code'          =>  'required',
             'name'          =>  'required',
             'description'   =>  'required',
             'price'         =>  'required|numeric',
@@ -76,7 +76,7 @@ class MenuController extends Controller
 
         Session::flash('success', 'The new menu was successfully created!');
 
-        return redirect()->route('menu.show', $menu->id);
+        return redirect()->route('menu.create');
     }
 
     /**
@@ -123,7 +123,7 @@ class MenuController extends Controller
             ));
 
         $menu = Menu::find($id);
-
+        $menu->category_id  =   $request->category_id;
         $menu->code         =   $request->code;
         $menu->name         =   $request->name;
         $menu->description  =   $request->description;
@@ -147,7 +147,7 @@ class MenuController extends Controller
 
         Session::flash('success', 'The menu was successfully updated!');
 
-        return redirect()->route('menu.show', $menu->id);
+        return redirect()->route('menu.index');
     }
 
     /**
