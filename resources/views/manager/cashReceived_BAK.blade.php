@@ -43,8 +43,8 @@
       </table>
       <table width="100%" class="table table-hover">
         <tbody>
-          <tr style="border-bottom: 1px solid #000;">
-            {{ Form::open(['method' => 'post', 'route' => ['order.cashReceived', $orderManages->id],'target' => '_blank',]) }}
+          <tr>
+            {{ Form::open(['method' => 'post', 'route' => ['order.getPaymentModes', $orderManages->id]]) }}
 
             <td width="20%" style="vertical-align: middle;">
               {{ Form::label('discount', 'Discount Percentage:', ['class'=> 'control-label']) }}
@@ -70,7 +70,7 @@
           </tr>
           <tr>
             <td colspan="4" style="text-align: center; padding-top: 40px;">
-              {{ Form::submit('Submit Bill', ['class' => 'btn btn-success']) }}
+              {{ Form::submit('Cash Receive', ['class' => 'btn btn-success']) }}
             </td>
           </tr>
           {{ Form::close() }}

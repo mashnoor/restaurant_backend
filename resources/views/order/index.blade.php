@@ -57,7 +57,7 @@
 							@endif
 						</td>
 						<td>							
-							<a href="{{ route('order.show', $order->id) }}" class="btn btn-primary btn-sm">View</a>
+							<a target="_blank" href="{{ route('order.show', $order->id) }}" class="btn btn-primary btn-sm">View</a>
 						</td>
 						@if ($order->status == 2)
 							<td>------</td>

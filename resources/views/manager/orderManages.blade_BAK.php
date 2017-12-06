@@ -47,12 +47,10 @@
                 Process
               @elseif ($orderManage->status == 3)
                 Serve
-              {{-- @elseif ($orderManage->status == 4)
-                Print Invoice --}}
+              @elseif ($orderManage->status == 4)
+                Print Invoice
               @elseif ($orderManage->status == 5)
                 Order Completed
-              @elseif ($orderManage->status == 6)
-                Order Completed(Void)
               @endif
             </td>
             <td>              
@@ -60,15 +58,17 @@
             </td>
             @if ($orderManage->status == 3)
               <td>
-                <a href="{{ route('order.submitBill', $orderManage->id) }}" class="btn btn-info btn-sm">Bill Submit</a>
+                {{-- <a target="_blank" href="{{ route('order.billSubmit', $orderManage->id) }}" onclick="window.location.reload(true)" class="btn btn-info btn-sm">Submit Bill</a> --}}
+
+                <a  style="cursor: pointer;"  class="btn btn-info btn-sm PrintInvoice"  data-printinvoice="{{ $orderManage->id }}">Submit Bill</a>
               </td>
-            {{-- @elseif ($orderManage->status == 4)
+            @elseif ($orderManage->status == 4)
               <td>
                 <a href="{{ route('order.cashReceived', $orderManage->id) }}" class="btn btn-info btn-sm">Cash Received</a>
-              </td> --}}
+              </td>
             @elseif ($orderManage->status >= 5)
               <td>
-                <a href="{{ route('order.voidCash', $orderManage->id) }}" class="btn btn-success btn-sm">VOID</a>
+                <a href="{{ route('order.edit', $orderManage->id) }}" class="btn btn-success btn-sm">VOID</a>
               </td>
               
             @endif
@@ -84,7 +84,7 @@
     </div>
   </div>
 
-{{-- <script>
+<script>
   $(document).ready(function() { 
 
     $(".PrintInvoice").click(function(){
@@ -117,7 +117,7 @@
     // },5000);
 
   });
-</script> --}}
+</script>
 
 @stop
 

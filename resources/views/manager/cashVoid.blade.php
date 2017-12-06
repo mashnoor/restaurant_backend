@@ -10,7 +10,7 @@
         <table width="100%">
           <tr>
             <td colspan="2" width="50%">&nbsp;</td>
-            <td width="10%"><h4>Invoice ID : {{ $orderManages->id }}</h4></td>
+            <td width="10%"><h4>Invoice ID : {{ $voidcash->id }}</h4></td>
           </tr>
         </table>
         <hr>
@@ -20,31 +20,33 @@
           <th>Menu Name</th>
           <th>Quantity</th>
           <th>Price</th>
-          <th>Discount</th>
+          <th>Discount(%)</th>
+          <th>Discount Cash</th>
           <th>Total</th>
         </thead>
         <tbody>
           <?php $grandTotal = 0; ?>
-          @foreach ($orderManages->menus as $menu)
+          @foreach ($voidcash->menus as $menu)
             <tr>
               <td>{{ $menu->name }}</td>
               <td>{{ $menu->pivot->quantity }}</td>
               <td>{{ $menu->pivot->price }}</td>
-              <td>{{ $menu->pivot->discount }}</td>
+              <td>{{ $voidcash->discount }}</td>
+              <td>{{ $voidcash->discount_cash }}</td>
               <td>{{ $menu->pivot->total }}</td>
               <?php $grandTotal += $menu->pivot->total; ?>
             </tr>
           @endforeach
           <tr>
-            <td colspan="4" width="80%">Total Amount</td>
+            <td colspan="5" width="80%">Total Amount</td>
             <td width="20%">{{ $grandTotal }}</td>
           </tr>
         </tbody>
       </table>
       <table width="100%" class="table table-hover">
         <tbody>
-          <tr style="border-bottom: 1px solid #000;">
-            {{ Form::open(['method' => 'post', 'route' => ['order.cashReceived', $orderManages->id],'target' => '_blank',]) }}
+          <tr>
+            {{ Form::open(['method' => 'post', 'route' => ['order.updateVoidCash', $voidcash->id],'target' => '_blank',]) }}
 
             <td width="20%" style="vertical-align: middle;">
               {{ Form::label('discount', 'Discount Percentage:', ['class'=> 'control-label']) }}
@@ -58,7 +60,7 @@
             </td>
             <td width="15%" style="vertical-align: middle;">
               {{ Form::number('discount_cash', 0, ['class' => 'form-control cash']) }}
-              {{ Form::hidden('id', $orderManages->id) }}
+              {{ Form::hidden('id', $voidcash->id) }}
               {{ Form::hidden('nettotal', $grandTotal) }}
             </td>
             <td width="15%" style="vertical-align: middle;">

@@ -8,25 +8,27 @@
 			<h1 class="text-center">Order Details</h1>
 			<div class="col-md-10 col-md-offset-1">
 				<p style="text-align: right;"><strong>Waiter Name: {{ $order->waiterName->name }}</strong></p>
+				<p style="text-align: right;"><strong>Table Name: {{ $order->table->code }}</strong></p>
+				<p style="text-align: right;"><strong>Order Number: {{ $order->id }}</strong></p>
 				<hr>
 			</div>
 			<table class="table table-hover">
 				<thead>
 					<th>Menu Name</th>
-					<th>Order ID</th>
+					{{-- <th>Order ID</th> --}}
 					<th>Quantity</th>
 					<th>Price</th>
-					<th>Discount</th>
+					{{-- <th>Discount</th> --}}
 					<th>Total</th>
 				</thead>
 				<tbody>
 					@foreach ($order->menus as $menu)
 						<tr>
 							<td>{{ $menu->name }}</td>
-							<td>{{ $order->id	}}</td>
+							{{-- <td>{{ $order->id	}}</td> --}}
 							<td>{{ $menu->pivot->quantity }}</td>
 							<td>{{ $menu->pivot->price }}</td>
-							<td>{{ $menu->pivot->discount }}</td>
+							{{-- <td>{{ $menu->pivot->discount }}</td> --}}
 							<td>{{ $menu->pivot->total }}</td>
 						</tr>
 					@endforeach

@@ -18,7 +18,7 @@
       <!-- page content -->
       <div class="right_col" role="main">
 
-        @include('..menu.messages')
+        @include('admin.alertMessages')
         @yield('content')
         
 
