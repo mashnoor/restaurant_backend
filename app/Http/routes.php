@@ -41,7 +41,6 @@ Route::get('logins', ['as' => 'user.login', 'uses' => 'LoginAdminController@getL
 Route::post('logins', ['as' => 'user.postLogin', 'uses' => 'LoginAdminController@postLogin']);
 Route::get('logout', ['as' => 'user.logout', 'uses' => 'LoginAdminController@getLogout']);
 
-
 Route::resource('user', 'UserController');
 Route::resource('menu', 'MenuController');
 Route::resource('discount', 'DiscountController');
@@ -55,12 +54,19 @@ Route::get('/order/serve/{id}', ['as'=> 'order.serve', 'uses'=> 'OrderController
 Route::get('/pantry', 'PantryController@index');
 Route::get('/pantry/show/{id}', ['as'=> 'pantry.show', 'uses'=> 'OrderController@show']);
 
+// Cash Received
 Route::get('/order/manages', ['as'=> 'order.manages', 'uses'=> 'CashManagerController@orderManages']);
 Route::get('/order/showCash/{id}', ['as'=> 'order.showCash', 'uses'=> 'CashManagerController@showCash']);
-Route::post('/order/billSubmit', ['as'=> 'order.billSubmit', 'uses'=> 'CashManagerController@billSubmit']);
+// Route::post('/order/billSubmit', ['as'=> 'order.billSubmit', 'uses'=> 'CashManagerController@billSubmit']);
+Route::get('/order/submitBill/{id}', ['as'=> 'order.submitBill', 'uses'=> 'CashManagerController@submitBill']);
 Route::get('/order/printInvoice/{id}', ['as'=> 'order.printInvoice', 'uses'=> 'CashManagerController@printInvoice']);
-Route::get('/order/cashReceived/{id}', ['as'=> 'order.cashReceived', 'uses'=> 'CashManagerController@cashReceived']);
-Route::post('/order/getPaymentModes/{id}', ['as'=> 'order.getPaymentModes', 'uses'=> 'CashManagerController@getPaymentModes']);
+Route::post('/order/cashReceived/{id}', ['as'=> 'order.cashReceived', 'uses'=> 'CashManagerController@cashReceived']);
+
+// Void Cash
+Route::get('/order/voidCash/{id}', ['as'=> 'order.voidCash', 'uses'=> 'CashManagerController@voidCash']);
+Route::post('/order/updateVoidCash/{id}', ['as'=> 'order.updateVoidCash', 'uses'=> 'CashManagerController@updateVoidCash']);
+Route::get('/order/voidPrint/{id}', ['as'=> 'order.voidPrint', 'uses'=> 'CashManagerController@voidPrint']);
+
 Route::get('/order/available',  'AvailableMenuController@showAvailableMenus');
 Route::get('/order/availables/{id}', ['as'=> 'order.availables', 'uses'=> 'AvailableMenuController@availableMenus']);
 Route::get('/order/unavailable/{id}', ['as'=> 'order.unavailable', 'uses'=> 'AvailableMenuController@unavailableMenus']);
