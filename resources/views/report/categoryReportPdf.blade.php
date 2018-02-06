@@ -35,7 +35,7 @@
     <div class="border" style="border-top:2px solid #000;">&nbsp;</div>
 
     <table width="100%" style="text-align:center; width:100%; margin-top:0px;">
-        <tr><td class="titles"><strong>VAT Registration No. : 12011059900</strong></td></tr>
+      <tr><td class="titles"><strong>VAT Registration No. : 12011059900</strong></td></tr>
     </table>
 
     <table width="100%" style="margin-top:30px;">
@@ -44,18 +44,11 @@
         <td width="20%" class="subtitles">&nbsp;</td>
         <td width="40%" class="subtitles">&nbsp;</td>
       </tr>
-      {{-- <tr>
-        <td width="40%" class="subtitles"><strong>From Date</strong></td>
-        <td width="20%" class="subtitles">&nbsp;</td>
-        <td width="40%" class="subtitles"><strong>To Date</strong></td>
-      </tr> --}}
     </table>
   
     <table class="order-details" border="1" width="100%" style="margin-top:10px;">
       <tr class="border-bottom" style="border-bottom:1px solid #000;">
-        {{-- <td width="10%" class="mintitles">SI</td> --}}
         <td width="12%" class="mintitles">Category Name</td>
-        {{-- <td width="8%" class="mintitles">Guest</td> --}}
         <td width="15%" class="mintitles">Menu Name</td>
         <td width="13%" class="mintitles">Quantity</td>
         <td width="12%" class="mintitles">Price</td>
@@ -68,7 +61,6 @@
       ?>
       @foreach ($categories as $categorie)
         <tr>
-          {{-- <td>{{ $categorie->id }}</td> --}}
           <td>{{ $categorie->name }}</td>
           <td>{{ $categorie->Menu }}</td>
           <td>{{ $categorie->Quantity }}</td>
@@ -85,15 +77,11 @@
       <tr>
         <td width="10%">&nbsp;</td>
         <td width="12%"><strong>Total Summery</strong></td>
-        {{-- <td width="8%"><strong>107</strong></td> --}}
-        <td width="15%">&nbsp;</td>
         <td width="13%"><strong>{{ $totalQuantity }}</strong></td>
         <td width="12%"><strong>{{ $totalPrice }}</strong></td>
         <td width="15%"><strong>{{ $grandTotal }}</strong></td>
       </tr>
-
-    </table> 
-
+    </table>
   </div>
 </body>
 </html>

@@ -15,16 +15,14 @@
 			<table class="table table-hover">
 				<thead>
 					<th>Menu Name</th>
-					{{-- <th>Order ID</th> --}}
 					<th>Quantity</th>
 					<th>Price</th>
-					{{-- <th>Discount</th> --}}
 					<th>Total</th>
 				</thead>
 				<tbody>
 					@foreach ($order->menus as $menu)
 						<tr>
-							<td style="font-size: 30px;">{{ $menu->name }}</td>							
+							<td style="font-size: 30px;">{{ $menu->name }}</td>
 							<td style="font-size: 30px;">{{ $menu->pivot->quantity }}</td>
 							<td style="font-size: 30px;">{{ $menu->pivot->price }}</td>
 							<td style="font-size: 30px;">{{ $menu->pivot->total }}</td>

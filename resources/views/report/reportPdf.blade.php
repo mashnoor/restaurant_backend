@@ -34,7 +34,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
     <div class="border" style="border-top:2px solid #000;">&nbsp;</div>
   
     <table width="100%" style="text-align:center; width:100%; margin-top:0px;">
-        <tr><td class="titles"><strong>VAT Registration No. : 12011059900</strong></td></tr>
+      <tr><td class="titles"><strong>VAT Registration No. : 12011059900</strong></td></tr>
     </table>
     <table width="100%" style="margin-top:30px;">
       <tr>
@@ -42,11 +42,6 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
         <td width="20%" class="subtitles">&nbsp;</td>
         <td width="40%" class="subtitles">&nbsp;</td>
       </tr>
-      {{-- <tr>
-        <td width="40%" class="subtitles"><strong>From Date</strong></td>
-        <td width="20%" class="subtitles">&nbsp;</td>
-        <td width="40%" class="subtitles"><strong>To Date</strong></td>
-      </tr> --}}
     </table>
   
     <table class="order-details" border="1" width="100%" style="margin-top:10px;">
@@ -85,25 +80,24 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
         $total_discount += $report->discount;
         $total_cash += $report->cash_received;
 
-        if(array_key_exists(App\Helper::getPaymentModes()[$report->payment_modes] , $reportSummery))
+        if(array_key_exists(App\Helper::getPaymentModes()[$report->payment_modes], $reportSummery))
         {
-          foreach ($reportSummery as $i => $val) {       
-            if ($i == App\Helper::getPaymentModes()[$report->payment_modes]) {            
-              $reportSummery[$i] = $reportSummery[$i] + $report->cash_received;          
+          foreach ($reportSummery as $i => $val) {
+            if ($i == App\Helper::getPaymentModes()[$report->payment_modes]) {
+              $reportSummery[$i] = $reportSummery[$i] + $report->cash_received;
             }
           }
         }
         else
         {
-          $reportSummery[App\Helper::getPaymentModes()[$report->payment_modes]] = $report->cash_received; 
+          $reportSummery[App\Helper::getPaymentModes()[$report->payment_modes]] = $report->cash_received;
         }
 
         $i++;
         ?>
       </tr>
+      @endforeach
 
-      @endforeach  
-  
       <?php 
       $reportSummeryArray = array();
       $m = 0;
@@ -112,7 +106,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
         $reportSummeryArray[] = array(0 => $ekey, 1 => $eval);
         $m++;
       }
-      ?>      
+      ?>
 
       <tr>
         <td width="10%">&nbsp;</td>
@@ -121,15 +115,15 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
         <td width="13%"><strong>{{ $sub_total }}</strong></td>
         <td width="12%"><strong>{{ $total_vat }}</strong></td>
         <td width="15%"><strong>{{ $total_discount }}</strong></td>
-        <td width="15%"><strong>{{ $total_cash }}</strong></td>
+        <td width="15%"><strong>{{ round($total_cash) }}</strong></td>
       </tr>
       <?php  
-      $void_discount=0;
-      $void_total=0; 
-      $total_void_discount=0; 
+      $void_discount = 0;
+      $void_total = 0;
+      $total_void_discount = 0;
       ?>
 
-       <?php if($id_void !=0){ ?>
+      <?php if($id_void !=0){ ?>
       <tr class="border-top" style="border-top:1px solid #000; text-align:left;">
         <td width="10%"><strong>Void</strong></td>
         <td colspan="6">&nbsp;</td>
@@ -138,23 +132,19 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
     <?php } ?>
     @foreach ($reports as $report)
 
-       
      <?php
-
-     if($report->status==6) { ?>
-
+     if($report->status == 6) { ?>
       <tr>
         <td>{{ $report->id }}</td>
         <td>{{ $report->code }}</td>
         <td>{{ App\Helper::getPaymentModes()[$report->payment_modes] }}</td>
-        <td>{{ $report->net_total  -  $report->cash_received }}</td>
+        <td>{{ $report->net_total - $report->cash_received }}</td>
         <td>0.00</td>
         <td>0.00</td>
         <td>0.00</td>
         <?php 
-        $void_discount = $report->net_total  -  $report->cash_received ;
-        $total_void_discount = $total_void_discount +  ($report->net_total  -  $report->cash_received);
-        
+        $void_discount = $report->net_total - $report->cash_received ;
+        $total_void_discount = $total_void_discount + ($report->net_total - $report->cash_received);
         $i++;
         ?>
       </tr>
@@ -179,15 +169,14 @@ table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 
       @foreach ($reportSummeryArray as $element)
       <tr>
         <td width="50%" style="border:1px solid #fff; text-align:center; padding:10px 0px;"> {{ $element[0] }} </td>
-        <td width="50%" style="border:1px solid #fff; text-align:center; padding:10px 0px;">{{ $element[1] }}</td>
+        <td width="50%" style="border:1px solid #fff; text-align:center; padding:10px 0px;">{{ round($element[1]) }}</td>
       </tr>
       @endforeach
       <tr>
         <td width="50%" style="border-top:1px solid #000; text-align:center; padding:10px 0px;"><strong>Total Collection</strong></td>
-        <td width="50%" style="border-top:1px solid #000; text-align:center; padding:10px 0px;"><strong>{{ $total_cash }}</strong></td>
+        <td width="50%" style="border-top:1px solid #000; text-align:center; padding:10px 0px;"><strong>{{ round($total_cash) }}</strong></td>
       </tr>
-     
-    </table>  
+    </table>
 
   </div>
 </body>

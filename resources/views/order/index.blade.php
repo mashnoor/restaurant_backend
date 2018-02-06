@@ -53,7 +53,7 @@
 							@elseif ($order->status == 5)
 								Order Complete
 							@elseif ($order->status == 6)
-								Order Complete(Void) 
+								Order Complete(Void)
 							@endif
 						</td>
 						<td>							
@@ -85,6 +85,14 @@
 		</div>
 	</div>
 
+	@if($sound=='play')
+		<div style="display:none;">
+			<audio controls autoplay>
+			  <source src="audio/nf.mp3" type="audio/mpeg" autoplay>
+					Your browser does not support the audio element.
+			</audio>
+		</div>
+	@endif
 <script type="text/javascript">
 
 	setTimeout(function(){
