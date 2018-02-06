@@ -69,7 +69,7 @@ class ReportsController extends Controller
             ->orderBy('id','desc')
             ->get();
 
-    $mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp']);
+    $mpdf = new \Mpdf\Mpdf(['tempDir' => '/var/www/html/tmp']);
     $mpdf->WriteHTML(view('report.reportPdf')->withReports($reports));    
     $mpdf->Output('reports.pdf', 'I');
 
