@@ -11,12 +11,19 @@ use App\Order;
 class OrderController extends Controller
 {
 
-  public function index()
+    public function index()
   {
     $orders = Order::where('status', '>=', 1)->orderBy('id','desc')->paginate(30);
     // $orders = Order::orderBy('id', 'desc')->paginate(15);
-
-    return view('order.index')->withOrders($orders);
+    $sound='stop';
+    $countorder=count($orders);
+    $sessionCounter=Session::get('ordercnter');
+    if($countorder> $sessionCounter)
+    {
+      $sound='play';
+    }
+    Session::put('ordercnter',count($orders));
+    return view('order.index')->withOrders($orders)->withSound($sound);
   }
 
 
