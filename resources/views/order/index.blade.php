@@ -88,7 +88,7 @@
 	@if($sound=='play')
 		<div style="display:none;">
 			<audio controls autoplay>
-			  <source src="audio/nf.mp3" type="audio/mpeg" autoplay>
+			  <source src="/var/www/html/restaurant/public/audio/nf.mp3" type="audio/mpeg" autoplay>
 					Your browser does not support the audio element.
 			</audio>
 		</div>
