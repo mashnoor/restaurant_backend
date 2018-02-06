@@ -73,6 +73,7 @@ Route::get('/order/unavailable/{id}', ['as'=> 'order.unavailable', 'uses'=> 'Ava
 
 // Daily Sales Report
 Route::get('reports', ['as' => 'daily.reports', 'uses' => 'ReportsController@index']);
+Route::post('report-search', ['as' => 'report.search', 'uses' => 'ReportsController@searchReport']);
 Route::post('reportDownload', ['as' => 'download.reports', 'uses' => 'ReportsController@reportDownload']);
 Route::get('storeReports', ['as' => 'store.report', 'uses' => 'ReportsController@storeReports']);
 Route::post('categoryWiseReport', ['as' => 'categorywise.reports', 'uses' => 'ReportsController@categoryWiseReport']);
