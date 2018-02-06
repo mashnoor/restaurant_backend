@@ -133,4 +133,10 @@ class TableController extends Controller
 
         return redirect()->route('table.index');
     }
+	public function getTableCode($id)
+	{
+		$table = Table::find($id);
+		return $table->code;
+		
+	}
 }

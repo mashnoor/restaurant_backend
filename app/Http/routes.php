@@ -35,6 +35,7 @@ Route::group(['prefix'=>'api/'], function() {
 	});
 });
 
+Route::get('/api/gettablecode/{id}', 'TableController@getTableCode');
 
 // User login
 Route::get('logins', ['as' => 'user.login', 'uses' => 'LoginAdminController@getLogin']);
