@@ -36,9 +36,10 @@ class ReportsController extends Controller
             ->where('orders.status', '>=', 5)
             ->get();
 
-    $mpdf = new \Mpdf\Mpdf();
+
+    $mpdf = new \Mpdf\Mpdf(['tempDir' => '/var/www/html/restaurant/']);
     $mpdf->WriteHTML(view('report.reportPdf')->withReports($reports));    
-    $mpdf->Output();
+    $mpdf->Output('reports.pdf', 'I');
 
   }
 
@@ -81,9 +82,9 @@ class ReportsController extends Controller
                 ->get();
 
 
-    $mpdf = new \Mpdf\Mpdf();
+    $mpdf = new \Mpdf\Mpdf(['tempDir' => '/var/www/html/restaurant/']);
     $mpdf->WriteHTML(view('report.categoryReportPdf')->withCategories($categories));
-    $mpdf->Output();
+    $mpdf->Output('categoryreports.pdf', 'I');
 
   }
 

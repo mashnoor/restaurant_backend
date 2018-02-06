@@ -52,8 +52,8 @@
 								Cash Received
 							@elseif ($order->status == 5)
 								Order Complete
-							{{-- @elseif ($order->status == 6)
-								Order Complete --}}
+							@elseif ($order->status == 6)
+								Order Complete(Void) 
 							@endif
 						</td>
 						<td>							

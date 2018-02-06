@@ -24,12 +24,10 @@
 				<tbody>
 					@foreach ($order->menus as $menu)
 						<tr>
-							<td>{{ $menu->name }}</td>
-							{{-- <td>{{ $order->id	}}</td> --}}
-							<td>{{ $menu->pivot->quantity }}</td>
-							<td>{{ $menu->pivot->price }}</td>
-							{{-- <td>{{ $menu->pivot->discount }}</td> --}}
-							<td>{{ $menu->pivot->total }}</td>
+							<td style="font-size: 30px;">{{ $menu->name }}</td>							
+							<td style="font-size: 30px;">{{ $menu->pivot->quantity }}</td>
+							<td style="font-size: 30px;">{{ $menu->pivot->price }}</td>
+							<td style="font-size: 30px;">{{ $menu->pivot->total }}</td>
 						</tr>
 					@endforeach
 				</tbody>

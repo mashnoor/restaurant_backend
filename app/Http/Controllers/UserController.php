@@ -45,7 +45,7 @@ class UserController extends Controller
       'name'      =>  'required',
       'username'  =>  'required|unique:users,username',
       'user_type' =>  'required',
-      'password'  =>  'required|min:4',
+      'password'  =>  'required',
 
     ));
 
@@ -102,7 +102,7 @@ class UserController extends Controller
       'name'      =>  'required',
       'username'  =>  'required',
       'user_type' =>  'required',
-      'password'  =>  'required|min:4',
+      'password'  =>  'required',
 
     ));
 

@@ -3,109 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <title>{{-- Restaurant Management System --}}</title>
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif|PT+Serif|Playfair+Display|Roboto+Slab" rel="stylesheet"> 
 </head>
 
 <body>
   <style>
     html, body, div,fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,{margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align:top;}:focus {outline: 0;}
 
-    table {border-collapse: collapse; border-spacing: 0;} input, select {vertical-align:middle;} abbr[title], dfn[title] {border-bottom:1px dotted; cursor:help;} 
-    body {font-family: 'FreeSerif',sans-serif;}
+    table {border-collapse: collapse; border-spacing: 0;font-size: 11px;} input, select {vertical-align:middle;} abbr[title], dfn[title] {border-bottom:1px dotted; cursor:help;} 
+    body {font-family: 'PT Serif', serif;-webkit-print-color-adjust: exact;color-adjust: exact;}
     td.title{ font-size:30px; line-height:36px; color:#000;}
-    td.subtitle{ font-size:24px; line-height:30px; color:#000;}
-    td.mintitle{ font-size:20px; line-height:24px; color:#000;}
-    .order-details tr, .order-details td{ border:1px solid #cecece; text-align:center; padding:20px 0px;}
-    .order-detailsss tr, .order-detailsss td{ padding:10px 0px;border-left:0px;border-right:0px;border-top:2px solid #ccc;border-bottom:5px solid #ccc;}
-    .billing tr, .billing td{padding:5px 0px;}
+  td.subtitle{ font-size:14px; line-height:20px; color:#000;}
+  .billing, .order-detailss{font-size:12px; line-height:12px;}  
+td.subtitles { font-size:12px; line-height:12px; color:#000;} 
+td.mintitle{ font-size:13px; line-height:12px; color:#000;}  
+.order-details tr, .order-details td{ border:1px solid #000; text-align:center; padding:20px 0px;}
+    .order-detailsss tr, .order-detailsss td{ padding:5px 0px;border-left:0px;border-right:0px;border-top:2px solid #000;border-bottom:4px solid #000;}
+    .billing tr, .billing td{padding:1px 0px;}
 
   </style>
-  <div class="invoice-table" style="width: 580px; margin:0 auto;">
-    <table width="100%" style="text-align:center; width:100%;">
+  <div class="invoice-table" style="width: 100%; margin:0 auto;">
+    <table width="100%" style="text-align:center; width:100%;margin:0 auto;">
       <tr><td class="title">Flavours</td></tr>
-      <tr><td class="subtitles">Shaheb Bazar Zero Point (2nd Floor of Bata Shop)<br>
+      <tr><td>Shaheb Bazar Zero Point (2nd Floor of Bata Shop)<br>
         Rajshahi, Contact Telephone: 772826,<br>
         Mobile: 01713-228276, 01713-228278.
       </td></tr>
     </table>
-    <table class="order-detailsss" border="0" width="100%" style="margin-top:10px;">
+    <table class="order-detailsss" border="0" width="100%" style="width:100%;margin:10px auto 0px;">
       <tr>
         <td class="subtitles" style="text-align: center;"> <strong>Cash Copy</strong></td>
       </tr>
     </table>
-    <table class="billing" width="100%" style="margin-top:30px;">
+    <table class="billing" width="100%" style="width:100%;margin:5px auto 0px;">
       <tr>
-        <td width="50%" class="subtitles">Bill No: {{ $orderManages->id }}</td>
-        <td width="50%">VAT Reg: <strong>12011059900</strong></td>
+        <td width="55%" class="subtitles">Bill No: {{ $orderManages->id }}</td>
+        <td width="45%">VAT Reg: <strong>12011059900</strong></td>
       </tr>
       <tr>
-        <td width="50%" class="subtitles">Table Name: {{ $orderManages->table->code }}</td>
-        <td width="50%">Mushak - 11 - KA</td>
+        <td width="55%" class="subtitles">Table Name: {{ $orderManages->table->code }}</td>
+        <td width="45%">Mushak - 11 - KA</td>
       </tr>
       <tr>
-        <td width="50%" class="subtitles">Waiter Name: {{ $orderManages->waiterName->name }}</td>
-        <td width="50%">&nbsp;</td>
+        <td width="55%" class="subtitles">Waiter Name: {{ $orderManages->waiterName->name }}</td>
+        <td width="45%">&nbsp;</td>
       </tr>
       <tr>
-        <td width="50%" class="subtitles">Bill Date: <?php echo date('M j, Y'); ?></td>
-        <td width="50%">&nbsp;</td>
+        <td width="55%" class="subtitles">Bill Date: <?php echo date('M j, Y'); ?></td>
+        <td width="45%">&nbsp;</td>
       </tr>
     </table>
   
-    <table class="order-detailss" width="100%" style="margin-top:30px;">
-      <tr style="border-bottom:2px solid #ccc;">
-        <td width="35%" class="mintitle">Menu Name</td>
+    <table class="order-detailss" width="100%" style="width:100%;margin:5px auto 0px;">
+      <tr style="border-bottom:2px solid #000;">
+        <td width="5%" class="mintitle">Code</td>
+	<td width="65%" class="mintitle">Item Name</td>
         <td width="10%" class="mintitle">Qt</td>
         <td width="15%" class="mintitle">Rate</td>
-        <td width="15%" class="mintitle">Amount</td>
+        <td width="10%" class="mintitle">Amount</td>
       </tr>
      <?php $grandTotal = 0; ?>
       @foreach($orderManages->menus as $menu)
       <tr>
-        <td>{{ $menu->name }}</td>
-        <td>{{ $menu->pivot->quantity }}</td>
-        <td>{{ $menu->pivot->price }}</td>
-        <td>{{ $menu->pivot->total }}</td>
+        <td>{{ $menu->code }}</td>
+	<td>{{ $menu->name }}</td>
+        <td>{{ round($menu->pivot->quantity) }}</td>
+        <td>{{ round($menu->pivot->price) }}</td>
+        <td>{{ round($menu->pivot->total) }}</td>
 
         <?php $grandTotal += $menu->pivot->total; ?>
       </tr>
       @endforeach
-      <tr style="border-top:2px solid #ccc;">
-        <td colspan="3" width="80%">Total Amount</td>
-        <td width="20%">{{ $grandTotal }}</td>
+      <tr style="border-top:2px solid #000;">
+        <td colspan="4" width="90%">Total Amount</td>
+        <td width="10%"><strong>{{ $grandTotal }}</strong></td>
       </tr>
       
        <tr style="">
        
          <?php if($orderManages->discount_cash != 0) { ?>
-          <td colspan="3" width="80%">Discount(cash)</td>
-          <td width="20%">{{ $orderManages->discount_cash }}</td>
+          <td colspan="4" width="90%">Discount(cash)</td>
+          <td width="10%">{{ $orderManages->discount_cash }}</td>
         <?php } ?>
         <?php if($orderManages->discount != 0) { ?>
-         <td colspan="3" width="80%">Discount(%)</td>
-            <td width="20%">{{ $orderManages->discount }}</td>
+         <td colspan="4" width="90%">Discount(%)</td>
+            <td width="10%">{{ $orderManages->discount }}</td>
         <?php } ?>
       </tr>
-   
-      <tr style="">
-        <td colspan="3" width="80%">VAT</td>
-        <td width="20%">{{ $orderManages->vat }}</td>
-      </tr>
 
-      <tr style="border-top:2px solid #ccc;">
-        <td colspan="3" width="80%"><strong>Net Payable</strong></td>
-        <td width="20%">{{ $orderManages->cash_received}}</td>
+      <tr style="border-top:2px solid #000;">
+	<td>&nbsp;</td>
+        <td colspan="3" width="90%"><strong>Net Payable</strong></td>
+        <td width="10%"><strong>{{ round($orderManages->cash_received) }}</strong></td>
       </tr>
       <tr>
         <td colspan="5">
         <?php
           //echo App\Helper::numtowords($grandTotal);
         ?>
-        {{ App\Helper::numtowords($orderManages->cash_received) }}
+        {{ App\Helper::numtowords(round($orderManages->cash_received)) }} {{ 'Taka Only' }}
+	<br>
+        <?php 
+        $currentDateTime = date('h:i A');
+        $newDateTime = date('h:i A', strtotime($currentDateTime));
+        echo $newDateTime; ?>
         </td>
       </tr>
     </table>
-    <table width="100%" style="text-align:center; width:100%; margin-top:30px;">
-      <tr><td class="subtitle">Thank you for coming!</td></tr>
+    <table width="100%" style="text-align:center; width:100%; margin:5px auto 0px;">
+      <tr><td class="subtitle"><b>Thank you for coming!</b></td></tr>
+      <tr><td class="subtitles">VAT Included</td></tr>
       <tr><td class="subtitles">Developed & Maintain by raj IT Solutions Ltd.</td></tr>
     </table>
   </div>
