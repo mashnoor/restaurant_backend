@@ -100,7 +100,7 @@ class ReportsController extends Controller
                 // ->where('orders.status', '>=', 5)
                 ->get();
 
-    $mpdf = new \Mpdf\Mpdf();
+    $mpdf = new \Mpdf\Mpdf(['tempDir' => '/var/www/html/restaurant/']);
     $mpdf->WriteHTML(view('report.categoryReportPdf')->withCategories($categories));
     $mpdf->Output('categoryreports.pdf', 'I');
 
