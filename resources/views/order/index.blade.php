@@ -19,11 +19,6 @@
 				<thead>
 					<th>Order ID</th>
 					<th>Table Code</th>
-					<th>Sub Total</th>
-					<th>Discount</th>
-					<th>VAT</th>
-					<th>Total Discount</th>
-					<th>Net Total</th>
 					<th>Order Time</th>
 					<th>Status</th>
 					<th>View</th>
@@ -35,11 +30,6 @@
 					<tr>
 						<th>{{ $order->id }}</th>
 						<td>{{ $order->table->code }}</td>
-						<td>{{ $order->sub_total }}</td>
-						<td>{{ $order->discount }}</td>
-						<td>{{ $order->vat }}</td>
-						<td>{{ $order->rounding_discount }}</td>
-						<td>{{ $order->net_total }}</td>
 						<td>{{ date('M j, y, g:i a', strtotime($order->created_at)) }}</td>
 						<td>
 							@if ($order->status == 1)
@@ -85,7 +75,7 @@
 		</div>
 	</div>
 
-	@if($sound=='play')
+	@if($sound == 'play')
 		<div style="display:none;">
 			<audio controls autoplay>
 			  <source src="audio/nf.mp3" type="audio/mpeg" autoplay>

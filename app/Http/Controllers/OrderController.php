@@ -13,17 +13,20 @@ class OrderController extends Controller
 
     public function index()
   {
-    $orders = Order::where('status', '>=', 1)->orderBy('id','desc')->paginate(30);
+    $orders = Order::where('status', '>=', 1)->orderBy('id','desc')->get();
+    $orders2 = Order::where('status', '>=', 1)->orderBy('id','desc')->paginate(30);
     // $orders = Order::orderBy('id', 'desc')->paginate(15);
-    $sound='stop';
-    $countorder=count($orders);
-    $sessionCounter=Session::get('ordercnter');
-    if($countorder> $sessionCounter)
+    $sound = 'stop';
+    $countorder = count($orders);
+    $sessionCounter = Session::get('ordercnter');
+    if($countorder > $sessionCounter)
     {
-      $sound='play';
+      $sound = 'play';
+
     }
-    Session::put('ordercnter',count($orders));
-    return view('order.index')->withOrders($orders)->withSound($sound);
+Session::put('ordercnter',count($orders));
+    
+    return view('order.index')->withOrders($orders2)->withSound($sound);
   }
 
 
