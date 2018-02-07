@@ -266,8 +266,14 @@ class OrdersController extends Controller
             $amount_after_discount=$sub_total-($sub_total*$invoice_discount/100);
             $net_total=floor($amount_after_discount);
             $rounding_discount=number_format($amount_after_discount-$net_total,2);
-
+			
+				
             $order=Order::find($id);
+			
+			$table = Table::find($order->table_id);
+			$table->status = 'free';
+			$table->save();
+			
             $order->table_id=Table::where('code',$request->table_code)->first()->id;
             $order->type='Table';
             $order->sub_total=$sub_total;
