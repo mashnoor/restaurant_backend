@@ -283,6 +283,10 @@ class OrdersController extends Controller
             $order->status=1;
             $order->user_id=Auth::guard('api')->user()->id;
             $order->save();
+			
+			$table = Table::find($order->table_id);
+			$table->status = 'occupied';
+			$table->save();
 
             $order->menus()->sync($orderlines);
 
