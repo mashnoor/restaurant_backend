@@ -22,7 +22,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id',Auth::guard('api')->user()->id)->whereDate('created_at','=',date('Y-m-d'))->orderBy('id','DESC')->limit(20)->get();
+        $orders = Order::where('user_id',Auth::guard('api')->user()->id)->whereDate('created_at','=',date('Y-m-d'))->orderBy('id','DESC')->limit(20)->with('table')->get();
         $response=array(
             'status'=>1, 
             'msg'=>'Success!',
