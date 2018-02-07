@@ -15,7 +15,7 @@ class TablesController extends Controller
      */
     public function index()
     {
-        $tables = Table::all();
+        $tables = Table::where('status', 'free')->get();
         $response=array(
             'status'=>1, 
             'msg'=>'Success!',
